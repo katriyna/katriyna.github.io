@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="img2/favicon.ico">
+    <link rel="shortcut icon" href="http://gamechangers.ru/sites/default/files/favicon_6_0.ico">
 
     <title>Nёrd|Camp'14</title>
 
@@ -21,6 +21,7 @@
     <![endif]-->
 
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?109"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
     <style>
         .inner-item {
@@ -227,5 +228,23 @@
 </div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script lang="javascript">
+
+    $(function() {
+        var carouselContainer = $('.carousel');
+
+        function toggleCaption(){
+            var caption = carouselContainer.find('.active').find('.carousel-caption');
+            caption.slideToggle();
+        }
+
+        carouselContainer.carousel({
+            interval: 7000,
+            cycle: true,
+            pause: "hover"
+        }).on('slid slide', toggleCaption).trigger('slid');
+    });
+
+</script>
 </body>
 </html>
