@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".navbar">
 
 <div class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="container-fluid">
@@ -54,26 +54,12 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#keydates">Key Dates</a></li>
+                <li><a href="#program">Program</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="./">Default</a></li>
-                <li><a href="../navbar-static-top/">Static top</a></li>
-                <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+                <li class="active"><a href="./">Application Form</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
@@ -83,7 +69,7 @@
     <div class="page-header">
         <h1>Nёrd<font color="#d9230f">|</font>Camp
             <small>Spring'14
-            <button class="btn btn-default pull-right" onclick="">Apply</button></small></h1>
+            <button class="btn btn-default pull-right" onclick="location.href = 'www.yoursite.com'">Apply</button></small></h1>
     </div>
 
     <div id="myCarousel" class="slide carousel" data-ride="carousel">
@@ -161,11 +147,11 @@
 <div class="container doc-container">
     <div class="row">
         <div class="col-md-9">
-            <h3>About</h3>
+            <h3 id="about">About</h3>
             <div>Content</div>
-            <h3>Key Dates</h3>
+            <h3 id="keydates">Key Dates</h3>
             <div>Content</div>
-            <h3>Program</h3>
+            <h3 id="program">Program</h3>
             <div>
                 <div class="panel panel-collapse panel-primary">
                     <div class="panel-heading">
@@ -231,7 +217,7 @@
                 <!-- VK Widget -->
                 <div id="vk_groups"></div>
                 <script type="text/javascript">
-                    VK.Widgets.Group("vk_groups", {mode: 0, width: "220", height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 68967506);
+                    VK.Widgets.Group("vk_groups", {mode: 0, width: "220", height: "400", color1: 'fcfcfc', color2: '2B587A', color3: '5B7FA6'}, 68967506);
                 </script>
             </div>
         </div>
