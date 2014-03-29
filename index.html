@@ -38,6 +38,11 @@
         .page-header h1 {
             cursor: default;
         }
+
+        .sidebar-nav {
+            position: fixed;
+            top: 20px
+        }
     </style>
 </head>
 
@@ -62,14 +67,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="./">Application Form</a></li>
             </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
 </div>
 
 <div class="container">
     <div class="page-header">
         <h1>Nёrd<font color="#d9230f">|</font>Camp
-            <small>Spring'14</small></h1>
+            <small>Spring'14</small>
+        </h1>
     </div>
 
     <div id="myCarousel" class="slide carousel" data-ride="carousel">
@@ -138,8 +146,10 @@
                 </div>
             </div>
         </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
+                class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span
+                class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
     <hr/>
 </div>
@@ -147,11 +157,33 @@
 <div class="container doc-container">
     <div class="row">
         <div class="col-md-9">
-            <h3 id="about">About</h3>
-            <div>Content</div>
+
+            <div class="jumbotron">
+                <h3 id="about">About NёrdCamp</h3>
+
+                <p>
+                    For the fourth time NёrdCamp is gathering guests. Spring, countryside recreation center, comfortable
+                    holiday cottages, training sessions and evening party with BBQ…
+                    All this create unique atmosphere.
+                </p>
+
+                <p>
+                    It is up to you how are you going to use it.
+                    You can listen about activities which are outside your usual specialisation or exchange experience
+                    in your sphere. You can try yourself as organizer of a master class, discussion session or
+                    business game. Also NёrdCamp is a good chance to extend your social network with new contacts.
+                </p>
+
+                <p>
+                    Positive and friendly NёrdCamp’s environment will encourage you to spend time effectively. Will glad to see you soon!
+                </p>
+            </div>
+            <!--<div>This </div>-->
             <h3 id="keydates">Key Dates</h3>
+
             <div>Content</div>
             <h3 id="program">Program</h3>
+
             <div>
                 <div class="panel panel-collapse panel-primary">
                     <div class="panel-heading">
@@ -207,15 +239,16 @@
                     </div>
                 </div>
 
-                </div>
+            </div>
             <!--<h3>Speakers</h3>
             <div>Content</div>-->
         </div>
 
         <div class="col-md-3">
-            <div class="bs-docs-sidebar hidden-print affix-top" role="complementary">
+            <div class="bs-docs-sidebar hidden-print" role="complementary">
                 <!-- VK Widget -->
                 <div id="vk_groups"></div>
+
                 <script type="text/javascript">
                     VK.Widgets.Group("vk_groups", {mode: 0, width: "220", height: "400", color1: 'fcfcfc', color2: '2B587A', color3: '5B7FA6'}, 68967506);
                 </script>
@@ -230,10 +263,10 @@
 <script src="js/bootstrap.min.js"></script>
 <script lang="javascript">
 
-    $(function() {
+    $(function () {
         var carouselContainer = $('.carousel');
 
-        function toggleCaption(){
+        function toggleCaption() {
             var caption = carouselContainer.find('.active').find('.carousel-caption');
             caption.slideToggle();
         }
