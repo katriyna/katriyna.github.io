@@ -39,11 +39,6 @@
         .page-header h1 {
             cursor: default;
         }
-
-        .sidebar-nav {
-            position: fixed;
-            top: 20px
-        }
     </style>
 </head>
 
@@ -62,7 +57,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#about">About</a></li>
-                <li><a href="#keydates">Key Dates</a></li>
+                <!--<li><a href="#keydates">Key Dates</a></li>-->
                 <li><a href="#location">Location</a></li>
                 <!--<li><a href="#program">Program</a></li>-->
             </ul>
@@ -173,7 +168,11 @@
                 <p>
                     NёrdCamp is being organized by interdisciplinary research program <a href="http://gamechangers.ru">GameChangers</a>.
                     There are descriptions of previous meetings: <a href="http://gamechangers.ru/nc2">link</a> &amp;
-                    <a href="http://gamechangers.ru/nc3">link</a> - on the official site.
+                    <a href="http://gamechangers.ru/nc3">link</a> &mdash; on the official site.
+                </p>
+
+                <p>
+                    This year it will held <b>April 25-27</b>.
                 </p>
 
                 <p>
@@ -193,12 +192,14 @@
                     Positive and friendly NёrdCamp’s environment will encourage you to spend time effectively. Will glad to see you soon!
                 </p>
             </div>
-            <!--<div>This </div>-->
-            <h3 id="keydates">Key Dates</h3>
-            <div>NёrdCamp'14 will take </div>
+
+            <!--<h3 id="keydates">Key Dates</h3>-->
+
 
             <h3 id="location">Location &amp; Accomodation</h3>
-            <div>
+            <div>NёrdCamp'14 will take place in countryside recreation center <a href="http://orech.ru/">Orech</a>,
+            which is located in Leningradskaya oblast', 67th kilometer of highway Priozersky.</div>
+            <div style="margin: 25px">
                 <div id="map" style="width:600px; height:450px"></div>
             </div>
 
@@ -298,31 +299,6 @@
             cycle: true,
             pause: "hover"
         }).on('slid slide', toggleCaption).trigger('slid');
-
-        var myMap;
-
-// Дождёмся загрузки API и готовности DOM.
-        //ymaps.ready(init);
-
-
-
-        function init () {
-            var location = [60.482571, 30.269659];
-
-            myMap = new ymaps.Map('map', {
-                center: location,
-                zoom: 8
-            });
-
-            var myPlacemark = new ymaps.Placemark(location, {
-                balloonContentHeader: "Место проведения NerdCamp'14",
-                balloonContentBody: "",
-                balloonContentFooter: "База отдыха <a href='http://orech.ru/'>Орех</a>",
-                hintContent: "NerdCamp'14"
-            });
-
-            myMap.geoObjects.add(myPlacemark);
-        }
     });
 
 </script>
