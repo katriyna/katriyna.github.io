@@ -21,6 +21,7 @@
     <![endif]-->
 
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?109"></script>
+    <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=LYWwWjwljCuw762cx2-UM29k4cj-BXAV&id=map"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
     <style>
@@ -62,10 +63,11 @@
             <ul class="nav navbar-nav">
                 <li><a href="#about">About</a></li>
                 <li><a href="#keydates">Key Dates</a></li>
-                <li><a href="#program">Program</a></li>
+                <li><a href="#location">Location</a></li>
+                <!--<li><a href="#program">Program</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="./">Application Form</a></li>
+                <!--<li class="active"><a href="./">Application Form</a></li>-->
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -181,7 +183,12 @@
             <!--<div>This </div>-->
             <h3 id="keydates">Key Dates</h3>
 
-            <div>Content</div>
+            <h3 id="location">Location &amp; Accomodation</h3>
+            <div>
+                <div id="map" style="width:600px; height:450px"></div>
+            </div>
+
+           <!-- <div>Content</div>
             <h3 id="program">Program</h3>
 
             <div>
@@ -239,7 +246,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div>        -->
             <!--<h3>Speakers</h3>
             <div>Content</div>-->
         </div>
@@ -261,6 +268,7 @@
 </div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
 <script lang="javascript">
 
     $(function () {
@@ -276,6 +284,31 @@
             cycle: true,
             pause: "hover"
         }).on('slid slide', toggleCaption).trigger('slid');
+
+        var myMap;
+
+// Дождёмся загрузки API и готовности DOM.
+        //ymaps.ready(init);
+
+
+
+        function init () {
+            var location = [60.482571, 30.269659];
+
+            myMap = new ymaps.Map('map', {
+                center: location,
+                zoom: 8
+            });
+
+            var myPlacemark = new ymaps.Placemark(location, {
+                balloonContentHeader: "Место проведения NerdCamp'14",
+                balloonContentBody: "",
+                balloonContentFooter: "База отдыха <a href='http://orech.ru/'>Орех</a>",
+                hintContent: "NerdCamp'14"
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+        }
     });
 
 </script>
