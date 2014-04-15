@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://gamechangers.ru/sites/default/files/favicon_6_0.ico">
+
+    <title>Nёrd|Camp'14</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!--<link href="css/bootswatch.css" rel="stylesheet">-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?109"></script>
+    <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=LYWwWjwljCuw762cx2-UM29k4cj-BXAV&id=map"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <style>
+        .inner-item {
+            text-align: center;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+
+        .inner-item img {
+            margin: 0 auto;
+            width: 400px;
+        }
+
+        .page-header h1 {
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".navbar">
+
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#keydates">Key Dates</a></li>
+                <li><a href="index.html#location">Location</a></li>
+                <li><a href="index.html#fee">Registration Fee</a></li>
+                <li><a href="#participants">Participants</a></li>
+                <!--<li><a href="#program">Program</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li class="active"><a href="https://docs.google.com/forms/d/1dy2dEN_HwJnGF0nwqFUQvUIFasBS-7briI0WLWdailE/viewform">Application Form</a></li>-->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Nёrd<font color="#d9230f">|</font>Camp
+            <small>Spring'14</small>
+        </h1>
+    </div>
+
+    <div id="myCarousel" class="slide carousel" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0"></li>
+            <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+            <li data-target="#myCarousel" data-slide-to="6"></li>
+            <li data-target="#myCarousel" data-slide-to="7"></li>
+            <li data-target="#myCarousel" data-slide-to="8"></li>
+            <li data-target="#myCarousel" data-slide-to="9"></li>
+        </ol>
+        <div class="carousel-inner" style="text-align: center">
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/1.jpg">
+                </div>
+            </div>
+            <div class="item active">
+                <div class="inner-item">
+                    <img src="img2/2.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/3.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/4.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/5.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/6.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/7.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/8.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/9.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/10.jpg">
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
+                class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span
+                class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+    <hr/>
+</div>
+
+<div class="container doc-container">
+    <div class="row">
+        <div class="col-md-9">
+
+            <div class="jumbotron">
+                <h3 id="participants">Participants</h3>
+
+                <table class="table table-striped table-hover">
+                    <tbody>
+                        <tr>
+                            <td>Александр Кошевой</td>
+                            <td>Игорь Асонов</td>
+                        </tr>
+                        <tr>
+                            <td>Александра Шишова</td>
+                            <td>Илья Онскуль</td>
+                            </tr>
+                        <tr>
+                            <td>Алексей Григорьев</td>
+                            <td>Константин Федоров</td>
+                        </tr>
+                        <tr>
+                            <td>Алексей Кнорре</td>
+                            <td>Ксения Петрова</td>
+                        </tr>
+                        <tr>
+                            <td>Алексей Натёкин</td>
+                            <td>Леонид Залог</td>
+                        </tr>
+                        <tr>
+                            <td>Алексей Погибелев</td>
+                            <td>Лилия Земнухова</td>
+                        </tr>
+                        <tr>
+                            <td>Алена Маркович</td>
+                            <td>Маргарита Шарипова</td>
+                        </tr>
+                        <tr>
+                            <td>Алена Хабурина</td>
+                            <td>Мария Алисова</td>
+                        </tr>
+                        <tr>
+                            <td>Анастасия Кондратьева</td>
+                            <td>Михаил Винк</td>
+                        </tr>
+                        <tr>
+                            <td>Андрей Афанасьев</td>
+                            <td>Михаил Карпов</td>
+                        </tr>
+                        <tr>
+                            <td>Антон Самойлов</td>
+                            <td>Наталья Машьянова</td>
+                        </tr>
+                        <tr>
+                            <td>Валерия Кусакина</td>
+                            <td>Николай Вяххи</td>
+                        </tr>
+                        <tr>
+                            <td>Глеб Свечников</td>
+                            <td>Николай Котов</td>
+                        </tr>
+                        <tr>
+                            <td>Дина Чубарева</td>
+                            <td>Орлов Дмитрий</td>
+                        </tr>
+                        <tr>
+                            <td>Дмитрий Глушков</td>
+                            <td>Павел Смирнов</td>
+                        </tr>
+                        <tr>
+                            <td>Дмитрий Кудрявцев</td>
+                            <td>Павел Яковлев</td>
+                        </tr>
+                        <tr>
+                            <td>Дмитрий Петрашев</td>
+                            <td>Сергей Гумеров</td>
+                        </tr>
+                        <tr>
+                            <td>Евгений Баландин</td>
+                            <td>Сергей Дмитриев</td>
+                        </tr>
+                        <tr>
+                            <td>Евгения Козлова</td>
+                            <td>Федор Царев</td>
+                        </tr>
+                        <tr>
+                            <td>Егор Наумов</td>
+                            <td>Эдуард Парсаданян</td>
+                        </tr>
+                        <tr>
+                            <td>Екатерина Заикина</td>
+                            <td>Юлия Еременко</td>
+                        </tr>
+                        <tr>
+                            <td>Екатерина Чайкина</td>
+                            <td>Юрий Катков</td>
+                        </tr>
+
+                        <tr>
+                            <td>Елизавета Старовойтова</td>
+                            <td>Юрий Лифшиц</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- <div>Content</div>
+             <h3 id="program">Program</h3>
+
+             <div>
+                 <div class="panel panel-collapse panel-primary">
+                     <div class="panel-heading">
+                         <h3 class="panel-title">Friday</h3>
+                     </div>
+                     <div class="panel-body">
+                         <table class="table table-striped table-hover">
+                             <thead>
+                             <tr>
+                                 <th>#</th>
+                                 <th>Time</th>
+                                 <th>Description</th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                             <tr>
+                                 <td>1</td>
+                                 <td>Column content</td>
+                                 <td>Column content</td>
+                             </tr>
+                             <tr>
+                                 <td>2</td>
+                                 <td>Column content</td>
+                                 <td>Column content</td>
+                             </tr>
+                             <tr>
+                                 <td>3</td>
+                                 <td>Column content</td>
+                                 <td>Column content</td>
+                             </tr>
+                             <tr>
+                                 <td>4</td>
+                                 <td>Column content</td>
+                                 <td>Column content</td>
+                             </tr>
+                             <tr>
+                                 <td>5</td>
+                                 <td>Column content</td>
+                                 <td>Column content</td>
+                             </tr>
+                             <tr>
+                                 <td>6</td>
+                                 <td>Column content</td>
+                                 <td>Column content</td>
+                             </tr>
+                             <tr>
+                                 <td>7</td>
+                                 <td>Column content</td>
+                                 <td>Column content</td>
+                             </tr>
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+
+             </div>        -->
+            <!--<h3>Speakers</h3>
+            <div>Content</div>-->
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar" class="bs-docs-sidebar hidden-print">
+                <!-- VK Widget -->
+                <div id="vk_groups"></div>
+
+                <script type="text/javascript">
+                    VK.Widgets.Group("vk_groups", {mode: 0, width: "220", height: "400", color1: 'fcfcfc', color2: '2B587A', color3: '5B7FA6'}, 68967506);
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer"></div>
+
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script lang="javascript">
+
+    $(function () {
+        var carouselContainer = $('.carousel');
+
+        function toggleCaption() {
+            var caption = carouselContainer.find('.active').find('.carousel-caption');
+            caption.slideToggle();
+        }
+
+        carouselContainer.carousel({
+            interval: 7000,
+            cycle: true,
+            pause: "hover"
+        }).on('slid slide', toggleCaption).trigger('slid');
+    });
+
+</script>
+</body>
+</html>
