@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://gamechangers.ru/sites/default/files/favicon_6_0.ico">
+
+    <title>Nёrd|Camp'14</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!--<link href="css/bootswatch.css" rel="stylesheet">-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?109"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=LYWwWjwljCuw762cx2-UM29k4cj-BXAV&id=map"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <style>
+        .inner-item {
+            text-align: center;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+
+        .inner-item img {
+            margin: 0 auto;
+            width: 400px;
+        }
+
+        .page-header h1 {
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".navbar">
+
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#keydates">Key Dates</a></li>
+                <li><a href="index.html#location">Location</a></li>
+                <li><a href="index.html#fee">Registration Fee</a></li>
+                <li><a href="#participants">Participants</a></li>
+                <!--<li><a href="#program">Program</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li class="active"><a href="https://docs.google.com/forms/d/1dy2dEN_HwJnGF0nwqFUQvUIFasBS-7briI0WLWdailE/viewform">Application Form</a></li>-->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Nёrd<font color="#d9230f">|</font>Camp
+            <small>Spring'14</small>
+        </h1>
+    </div>
+
+    <div id="myCarousel" class="slide carousel" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0"></li>
+            <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+            <li data-target="#myCarousel" data-slide-to="6"></li>
+            <li data-target="#myCarousel" data-slide-to="7"></li>
+            <li data-target="#myCarousel" data-slide-to="8"></li>
+            <li data-target="#myCarousel" data-slide-to="9"></li>
+        </ol>
+        <div class="carousel-inner" style="text-align: center">
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/1.jpg">
+                </div>
+            </div>
+            <div class="item active">
+                <div class="inner-item">
+                    <img src="img2/2.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/3.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/4.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/5.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/6.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/7.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/8.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/9.jpg">
+                </div>
+            </div>
+            <div class="item">
+                <div class="inner-item">
+                    <img src="img2/10.jpg">
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
+                class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span
+                class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+    <hr/>
+</div>
+
+<div class="container doc-container">
+
+    <div class="row jumbotron">
+        <h2>Speakers</h2>
+
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/yakovlev.jpg" alt="pencil" class="img-circle">
+
+                        <h3>Pavel Yakovlev</h3>
+
+                        <p>Head of bioinformatics department at BIOCAD</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/lifshic.png" alt="folder" class="img-circle">
+
+                        <h3>Yury Lifshits</h3>
+
+                        <p>CEO at EARLYDAYS</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/dmitriev.png" alt="person" class="img-circle">
+
+                        <h3>Sergey Dmitriev</h3>
+
+                        <p>Co-founder at GameChangers</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/gumerov.jpg" alt="person" class="img-circle">
+
+                        <h3>Sergey Gumerov</h3>
+
+                        <p>Head of Business Consulting Services in North-west region IBM</p>
+                    </article>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/natekin.png" alt="person" class="img-circle">
+
+                        <h3>Alexey Natekin</h3>
+
+                        <p>Co-founder at DMLabs</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/tsarev.jpg" alt="person" class="img-circle">
+
+                        <h3>Fedor Tsarev</h3>
+
+                        <p>Researcher at NIU ITMO</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/vink.png" alt="person" class="img-circle">
+
+                        <h3>Michail Vink</h3>
+
+                        <p>Product Marketing Manager at JetBrains</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/zemnuhova.jpg" alt="person" class="img-circle">
+
+                        <h3>Lilia Zemnukhova</h3>
+
+                        <p>Researcher at European University</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/pogibelev.png" alt="person" class="img-circle">
+
+                        <h3>Alexey Pogibelev</h3>
+
+                        <p>Curator at Product Management track (GameChangers)</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/knorre.jpg" alt="person" class="img-circle">
+
+                        <h3>Alexey Knorre</h3>
+
+                        <p>Researcher at European University</p>
+                    </article>
+                </div>
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/asonov.png" alt="person" class="img-circle">
+
+                        <h3>Igor Asonov</h3>
+
+                        <p>Director of Center for Technical Creativity of the Youth, Fab Lab Polytech</p>
+                    </article>
+                </div>
+
+                <div class="col-md-3">
+                    <article>
+                        <img src="img2/speakers/kotov.png" alt="person" class="img-circle">
+
+                        <h3>Nikolay Kotov</h3>
+
+                        <p></p>
+                    </article>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer"></div>
+
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script lang="javascript">
+
+    $(function () {
+        var carouselContainer = $('.carousel');
+
+        function toggleCaption() {
+            var caption = carouselContainer.find('.active').find('.carousel-caption');
+            caption.slideToggle();
+        }
+
+        carouselContainer.carousel({
+            interval: 7000,
+            cycle: true,
+            pause: "hover"
+        }).on('slid slide', toggleCaption).trigger('slid');
+    });
+
+</script>
+</body>
+</html>
