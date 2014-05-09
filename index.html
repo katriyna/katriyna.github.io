@@ -45,6 +45,14 @@
         .page-header h1 {
             cursor: default;
         }
+
+        .modal-body img {
+            padding: 20px;
+        }
+
+        .my-modal-header {
+            padding: 15px;
+        }
     </style>
 </head>
 
@@ -279,20 +287,32 @@
     <div class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body next"></div>
+                <!--<div class="my-modal-header">-->
+                    <button type="button" class="close" aria-hidden="true" style="padding: 0 7px 7px 0">&times;</button>
+
+                <!--</div>-->
+
+                <div class="col-md-12 next modal-body"></div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left prev">
-                        <i class="glyphicon glyphicon-chevron-left"></i>
-                        Previous
-                    </button>
-                    <button type="button" class="btn btn-primary next">
-                        Next
-                        <i class="glyphicon glyphicon-chevron-right"></i>
-                    </button>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-primary pull-left prev">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-md-10 modal-title">
+                            <!--<h4 class="modal-title"></h6>-->
+                        </div>
+
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-primary next">
+                                <i class="glyphicon glyphicon-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -304,23 +324,5 @@
 <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <script src="js/bootstrap-image-gallery.min.js"></script>
 
-<script lang="javascript">
-
-    $(function () {
-        var carouselContainer = $('.carousel');
-
-        function toggleCaption() {
-            var caption = carouselContainer.find('.active').find('.carousel-caption');
-            caption.slideToggle();
-        }
-
-        carouselContainer.carousel({
-            interval: 7000,
-            cycle: true,
-            pause: "hover"
-        }).on('slid slide', toggleCaption).trigger('slid');
-    });
-
-</script>
 </body>
 </html>
