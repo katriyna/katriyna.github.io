@@ -46,12 +46,18 @@
             cursor: default;
         }
 
-        .modal-body img {
-            padding: 20px;
-        }
-
-        .my-modal-header {
-            padding: 15px;
+        div.modal-body img {
+            padding: 4px;
+            line-height: 1.42857143;
+            background-color: #fcfcfc;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+            display: inline-block;
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
         }
     </style>
 </head>
@@ -263,11 +269,43 @@
 
             <p>Stay nerdy :)</p>
 
+            <div class="row" id="slider-thumbs">
+                <div class="col-md-2">
+                    <a class="thumbnail" href="img2/photos/1.jpg" title="Final Light" data-gallery>
+                        <img src="img2/photos/1.jpg">
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <a class="thumbnail" id="carousel-selector-1">
+                        <img src="http://placehold.it/170x100&amp;text=two">
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <a class="thumbnail" id="carousel-selector-2">
+                        <img src="http://placehold.it/170x100&amp;text=three">
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <a class="thumbnail" id="carousel-selector-3">
+                        <img src="http://placehold.it/170x100&amp;text=four">
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <a class="thumbnail" id="carousel-selector-4">
+                        <img src="http://placehold.it/170x100&amp;text=five">
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    <a class="thumbnail" id="carousel-selector-5">
+                        <img src="http://placehold.it/170x100&amp;text=six">
+                    </a>
+                </div>
+            </div>
+
         </div>
 
 
 
-    </div>
 
     <div class="modal-footer"></div>
 
@@ -302,7 +340,7 @@
                             </button>
                         </div>
 
-                        <div class="col-md-10 modal-title">
+                        <div class="col-md-10 modal-title" style="padding: 7px">
                             <!--<h4 class="modal-title"></h6>-->
                         </div>
 
