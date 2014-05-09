@@ -12,7 +12,11 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-image-gallery.min.css" rel="stylesheet">
+
+    <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
+    <!--<link href="css/bootstrap-image-gallery.min.css" rel="stylesheet">-->
     <!--<link href="css/bootswatch.css" rel="stylesheet">-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -24,8 +28,7 @@
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?109"></script>
     <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=LYWwWjwljCuw762cx2-UM29k4cj-BXAV&id=map"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="js/jquery.blueimp-gallery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-image-gallery.min.js"></script>
+
 
     <style>
         .inner-item {
@@ -177,6 +180,20 @@
         </div>
 
         <div class="col-md-12">
+            <div>
+                <a href="http://farm6.static.flickr.com/5221/14138538124_689de88c9e_b.jpg" title="Shot in the night, Rzeszów Poland April 2014" data-gallery>
+                    <img src="http://farm6.static.flickr.com/5221/14138538124_689de88c9e_s.jpg">
+                </a>
+            </div>
+
+            <div>
+                <a href="http://farm6.static.flickr.com/5155/14160628283_9c6b900e1e_b.jpg" title="Final Light" data-gallery>
+                    <img src="http://farm6.static.flickr.com/5155/14160628283_9c6b900e1e_s.jpg">
+                </a>
+                <a href="http://farm8.static.flickr.com/7367/14139091665_d93d7ec614_b.jpg" title="oxbow" data-gallery>
+                    <img src="http://farm8.static.flickr.com/7367/14139091665_d93d7ec614_s.jpg">
+                </a>
+            </div>
 
             <h3>Co-learning</h3>
             <p>Co-learning program was diverse enough. Here is a list of several topics that were covered:</p>
@@ -247,8 +264,45 @@
     <div class="modal-footer"></div>
 
 </div>
+
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="js/bootstrap-image-gallery.min.js"></script>
 
 <script lang="javascript">
 
