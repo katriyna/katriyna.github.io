@@ -57,24 +57,24 @@
 	var Gallery = __webpack_require__(2);
 
 	var galleryLinks = {
-	  '../assets/rest7.jpg': __webpack_require__(9),
-	  '../assets/asonov1.jpg': __webpack_require__(10),
-	  '../assets/asonov2.jpg': __webpack_require__(11),
-	  '../assets/bbq1.jpg': __webpack_require__(12),
-	  '../assets/natekin.jpg': __webpack_require__(13),
-	  '../assets/lifshits.jpg': __webpack_require__(14),
-	  '../assets/dmitriev1.jpg': __webpack_require__(15),
-	  '../assets/domanski.jpg': __webpack_require__(16),
-	  '../assets/gumerov2.jpg': __webpack_require__(17),
-	  '../assets/bbq2.jpg': __webpack_require__(18),
-	  '../assets/nerd.jpg': __webpack_require__(19),
-	  '../assets/rest8.jpg': __webpack_require__(20),
-	  '../assets/rest1.jpg': __webpack_require__(21),
-	  '../assets/rest4.jpg': __webpack_require__(22)
+	  '../assets/rest7.jpg': __webpack_require__(10),
+	  '../assets/asonov1.jpg': __webpack_require__(11),
+	  '../assets/asonov2.jpg': __webpack_require__(12),
+	  '../assets/bbq1.jpg': __webpack_require__(13),
+	  '../assets/natekin.jpg': __webpack_require__(14),
+	  '../assets/lifshits.jpg': __webpack_require__(15),
+	  '../assets/dmitriev1.jpg': __webpack_require__(16),
+	  '../assets/domanski.jpg': __webpack_require__(17),
+	  '../assets/gumerov2.jpg': __webpack_require__(18),
+	  '../assets/bbq2.jpg': __webpack_require__(19),
+	  '../assets/nerd.jpg': __webpack_require__(20),
+	  '../assets/rest8.jpg': __webpack_require__(21),
+	  '../assets/rest1.jpg': __webpack_require__(22),
+	  '../assets/rest4.jpg': __webpack_require__(23)
 	};
 
 	$(function () {
-	  $(document.body).append(__webpack_require__(23));
+	  $(document.body).append(__webpack_require__(9));
 	  /**
 	   * Skrollr inits sticky header with status and animated arrows
 	   */
@@ -98,7 +98,7 @@
 	  });
 
 	  $.getScript('http://vk.com/js/api/openapi.js?109', function () {
-	    VK.Widgets.Group("vk_groups", {mode: 2, width: "260", height: "370", color1: 'ffffff', color2: '2B587A', color3: '5B7FA6'}, 89888706);
+	    VK.Widgets.Group("vk_groups", {mode: 2, width: "260", height: "350", color1: 'ffffff', color2: '2B587A', color3: '5B7FA6'}, 89888706);
 	  });
 	});
 
@@ -2043,91 +2043,91 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest7-1c3fb75ff7c9628404e4f9dafaf18104.jpg"
+	module.exports = "<div>\n    <div class=\"nerd-camp__header\">\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Nёrd<font color=\"#d9230f\">|</font>Camp\n                    <br/><small>April 24-26, 2015</small>\n                </h1>\n            </div>\n            <div class=\"nerd-camp__page-sub-header\">\n                <span>co-learning</span>\n                <span>co-working</span>\n                <span>co-resting</span>\n            </div>\n        </div>\n        <div data-0=\"@class:nerd-camp__header-container\"\n             data-top=\"@class:nerd-camp__header-container nerd-camp__header-container_sticky\">\n            <div class=\"container\">\n                <div class=\"navbar navbar-inverse\" role=\"navigation\">\n\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"#about\">About</a></li>\n                            <!--<li><a href=\"#key-dates\">Key Dates</a></li>-->\n                            <li><a href=\"http://nerdcamp.info/nc2014/\">NёrdCamp'14</a></li>\n                        </ul>\n                        <form class=\"navbar-form navbar-right\">\n                            <!--TODO: uncomment when registration form-->\n                            <!--<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\".nerd-camp__application-form-dlg\">\n                                Application Form\n                            </button>-->\n                        </form>\n                    </div>\n                    <!--/.nav-collapse -->\n\n                    <!--/.container-fluid -->\n                </div>\n                <div class=\"nerd-camp__header-images\">\n                    <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n                </div>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-images\">\n            <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <h3 id=\"about\">About Nёrd<font color=\"#d9230f\">|</font>Camp</h3>\n\n            <div class=\"row\">\n                <div class=\"col-md-7 nerd-camp__text-block nerd-camp__text-block_border\">\n                    Nёrd|Camp is a traditional 3-days event in a format of an outdoor weekend.\n                    The word \"Camp\" refers to <a href=\"http://en.wikipedia.org/wiki/BarCamp\">barcamps</a>,\n                    <a href=\"http://en.wikipedia.org/wiki/Foo_Camp\">foo camps</a>.\n                    Its program is formed by participants: specialists from IT industry, scientists and entrepreneurs.\n                    <br/>\n                    Nёrd|Camp has three modes:\n                    <ul>\n                        <li><b>Co-learning:</b> blocks of lectures on modern topics, presented by participants to each\n                            other\n                        </li>\n                        <li><b>Co-working:</b> discussions, workshops</li>\n                        <li><b>Co-resting:</b> outdoor activities, sport exercises every morning, BBQ</li>\n                    </ul>\n                </div>\n\n                <div class=\"col-md-4 nerd-camp__text-block nerd-camp__texture\">\n                    <div id=\"sidebar\" class=\"bs-docs-sidebar hidden-print\">\n                        <!-- VK Widget -->\n                        <div id=\"vk_groups\"></div>\n                    </div>\n                </div>\n            </div>\n\n            <h3 id=\"key-dates\">Key Dates</h3>\n\n            <div class=\"row\">\n                <div class=\"col-md-11 nerd-camp__text-block nerd-camp__text-block_border\">\n                    <div><b>April 24&ndash;26</b>&mdash; Nёrd|Camp</div>\n                    <!--<div><b>Second date</b>&mdash; Second date description</div>\n                    <div><b>Third date</b>&mdash; Third date description</div>-->\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"row nerd-camp_image-gallery\">\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest7.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(30) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(31) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(32) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(33) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/natekin.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(34) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/lifshits.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(35) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/dmitriev1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(36) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n\n            <br/>\n\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/domanski.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(37) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/gumerov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(38) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(39) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/nerd.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(40) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest8.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(41) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(42) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest4.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(43) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"row\">\n            <div class=\"col-md-12 nerd-camp__see-you\">See you soon <font color=\"#d9230f\">;)</font></div>\n        </div>\n\n        <div class=\"modal-footer nerd-camp__footer\">\n            <span>Game<font color=\"#d9230f\">|</font>Changers</span>\n            <span><a href=\"mailto:katriyna@gmail.com\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-envelope-o\"></i>&nbsp;</span>write a letter\n            </a></span>\n            <span><a href=\"http://vk.com/nerdcamp15s\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-vk\"></i>&nbsp;</span>subscribe group\n            </a></span>\n        </div>\n    </div>\n\n    <div id=\"blueimp-gallery\" class=\"blueimp-gallery\">\n        <div class=\"slides\"></div>\n        <h3 class=\"title\"></h3>\n        <a class=\"prev\">‹</a>\n        <a class=\"next\">›</a>\n        <a class=\"close\">×</a>\n        <a class=\"play-pause\"></a>\n        <ol class=\"indicator\"></ol>\n    </div>\n\n    <div class=\"modal nerd-camp__application-form-dlg\" tabindex=\"-1\" role=\"dialog\" labelledby=\"myModalLabel\" aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-md\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n                    <h4 class=\"modal-title\">Application Form</h4>\n                </div>\n                <div class=\"modal-body\">\n                    <iframe src=\"https://docs.google.com/forms/d/1dy2dEN_HwJnGF0nwqFUQvUIFasBS-7briI0WLWdailE/viewform?embedded=true\" width=\"560\" height=\"450\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\">\n                        Loading...\n                    </iframe>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n                    <button type=\"button\" class=\"btn btn-primary\">Submit</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n";
 
 /***/ },
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "asonov1-2b73589e1841bcca39d6fa9b94c755f8.jpg"
+	module.exports = __webpack_require__.p + "rest7-1c3fb75ff7c9628404e4f9dafaf18104.jpg"
 
 /***/ },
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "asonov2-8d0b6137c22b1f52cca1760d782490e5.jpg"
+	module.exports = __webpack_require__.p + "asonov1-2b73589e1841bcca39d6fa9b94c755f8.jpg"
 
 /***/ },
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "bbq1-4b37f7b86b2340668ca7e2a8849ec156.jpg"
+	module.exports = __webpack_require__.p + "asonov2-8d0b6137c22b1f52cca1760d782490e5.jpg"
 
 /***/ },
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "natekin-b8e04a597c42588a1462cc88fe75b678.jpg"
+	module.exports = __webpack_require__.p + "bbq1-4b37f7b86b2340668ca7e2a8849ec156.jpg"
 
 /***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "lifshits-c8bd0bd4ea3f636b986758a8ed7a7b67.jpg"
+	module.exports = __webpack_require__.p + "natekin-b8e04a597c42588a1462cc88fe75b678.jpg"
 
 /***/ },
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "dmitriev1-2acc3f64477cc6784cee6833869ca54a.jpg"
+	module.exports = __webpack_require__.p + "lifshits-c8bd0bd4ea3f636b986758a8ed7a7b67.jpg"
 
 /***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "domanski-04d0a07e0f96957c05a6d625a0167cf4.jpg"
+	module.exports = __webpack_require__.p + "dmitriev1-2acc3f64477cc6784cee6833869ca54a.jpg"
 
 /***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "gumerov2-ec533084cabf2c47a790d2c6e9a534d6.jpg"
+	module.exports = __webpack_require__.p + "domanski-04d0a07e0f96957c05a6d625a0167cf4.jpg"
 
 /***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "bbq2-18b7ca59296aacecad8aa1905fbf15f7.jpg"
+	module.exports = __webpack_require__.p + "gumerov2-ec533084cabf2c47a790d2c6e9a534d6.jpg"
 
 /***/ },
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "nerd-0f9aacf2620f5fb4f03e67d0c05d3d9b.jpg"
+	module.exports = __webpack_require__.p + "bbq2-18b7ca59296aacecad8aa1905fbf15f7.jpg"
 
 /***/ },
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest8-27470544a59cf4ae0e3418249fbddd70.jpg"
+	module.exports = __webpack_require__.p + "nerd-0f9aacf2620f5fb4f03e67d0c05d3d9b.jpg"
 
 /***/ },
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest1-1fde5029c9c4d9abcb3730e311cdbeb0.jpg"
+	module.exports = __webpack_require__.p + "rest8-27470544a59cf4ae0e3418249fbddd70.jpg"
 
 /***/ },
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest4-f286bbb4e26bdadd7d398cabff3a93bf.jpg"
+	module.exports = __webpack_require__.p + "rest1-1fde5029c9c4d9abcb3730e311cdbeb0.jpg"
 
 /***/ },
 /* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div>\n    <div class=\"nerd-camp__header\">\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Nёrd<font color=\"#d9230f\">|</font>Camp\n                    <br/><small>April 24-26, 2015</small>\n                </h1>\n            </div>\n            <div class=\"nerd-camp__page-sub-header\">\n                <span>co-learning</span>\n                <span>co-working</span>\n                <span>co-resting</span>\n            </div>\n        </div>\n        <div data-0=\"@class:nerd-camp__header-container\"\n             data-top=\"@class:nerd-camp__header-container nerd-camp__header-container_sticky\">\n            <div class=\"container\">\n                <div class=\"navbar navbar-inverse\" role=\"navigation\">\n\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"#about\">About</a></li>\n                            <!--<li><a href=\"#key-dates\">Key Dates</a></li>-->\n                            <li><a href=\"http://nerdcamp.info/nc2014/\">NёrdCamp'14</a></li>\n                        </ul>\n                        <form class=\"navbar-form navbar-right\">\n                            <!--TODO: uncomment when registration form-->\n                            <!--<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\".nerd-camp__application-form-dlg\">\n                                Application Form\n                            </button>-->\n                        </form>\n                    </div>\n                    <!--/.nav-collapse -->\n\n                    <!--/.container-fluid -->\n                </div>\n                <div class=\"nerd-camp__header-images\">\n                    <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n                </div>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-images\">\n            <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <h3 id=\"about\">About Nёrd<font color=\"#d9230f\">|</font>Camp</h3>\n\n            <div class=\"row\">\n                <div class=\"col-md-7 nerd-camp__text-block nerd-camp__text-block_border\">\n                    Nёrd|Camp is a traditional 3-days event in a format of an outdoor weekend.\n                    The word \"Camp\" refers to <a href=\"http://en.wikipedia.org/wiki/BarCamp\">barcamps</a>,\n                    <a href=\"http://en.wikipedia.org/wiki/Foo_Camp\">foo camps</a>.\n                    Its program is formed by participants: specialists from IT industry, scientists and entrepreneurs.\n                    <br/>\n                    Nёrd|Camp has three modes:\n                    <ul>\n                        <li><b>Co-learning:</b> blocks of lectures on modern topics, presented by participants to each\n                            other\n                        </li>\n                        <li><b>Co-working:</b> discussions, workshops</li>\n                        <li><b>Co-resting:</b> outdoor activities, sport exercises every morning, BBQ</li>\n                    </ul>\n                </div>\n\n                <div class=\"col-md-4 nerd-camp__text-block nerd-camp__texture\">\n                    <div id=\"sidebar\" class=\"bs-docs-sidebar hidden-print\">\n                        <!-- VK Widget -->\n                        <div id=\"vk_groups\"></div>\n                    </div>\n                </div>\n            </div>\n\n            <!--<h3 id=\"key-dates\">Key Dates</h3>\n\n            <div class=\"row\">\n                <div class=\"col-md-11 nerd-camp__text-block nerd-camp__text-block_border\">\n                    <div><b>First date</b>&mdash; First date description</div>\n                    <div><b>Second date</b>&mdash; Second date description</div>\n                    <div><b>Third date</b>&mdash; Third date description</div>\n                </div>\n            </div>-->\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"row nerd-camp_image-gallery\">\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest7.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(30) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(31) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(32) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(33) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/natekin.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(34) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/lifshits.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(35) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/dmitriev1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(36) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n\n            <br/>\n\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/domanski.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(37) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/gumerov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(38) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(39) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/nerd.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(40) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest8.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(41) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(42) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest4.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(43) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"row\">\n            <div class=\"col-md-12 nerd-camp__see-you\">See you soon <font color=\"#d9230f\">;)</font></div>\n        </div>\n\n        <div class=\"modal-footer nerd-camp__footer\">\n            <span>Game<font color=\"#d9230f\">|</font>Changers</span>\n            <span><a href=\"mailto:katriyna@gmail.com\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-envelope-o\"></i>&nbsp;</span>write a letter\n            </a></span>\n            <span><a href=\"http://vk.com/nerdcamp15s\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-vk\"></i>&nbsp;</span>subscribe group\n            </a></span>\n        </div>\n    </div>\n\n    <div id=\"blueimp-gallery\" class=\"blueimp-gallery\">\n        <div class=\"slides\"></div>\n        <h3 class=\"title\"></h3>\n        <a class=\"prev\">‹</a>\n        <a class=\"next\">›</a>\n        <a class=\"close\">×</a>\n        <a class=\"play-pause\"></a>\n        <ol class=\"indicator\"></ol>\n    </div>\n\n    <div class=\"modal nerd-camp__application-form-dlg\" tabindex=\"-1\" role=\"dialog\" labelledby=\"myModalLabel\" aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-md\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n                    <h4 class=\"modal-title\">Application Form</h4>\n                </div>\n                <div class=\"modal-body\">\n                    <iframe src=\"https://docs.google.com/forms/d/1dy2dEN_HwJnGF0nwqFUQvUIFasBS-7briI0WLWdailE/viewform?embedded=true\" width=\"560\" height=\"450\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\">\n                        Loading...\n                    </iframe>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n                    <button type=\"button\" class=\"btn btn-primary\">Submit</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n";
+	module.exports = __webpack_require__.p + "rest4-f286bbb4e26bdadd7d398cabff3a93bf.jpg"
 
 /***/ },
 /* 24 */
