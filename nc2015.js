@@ -52,30 +52,30 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(5);
-	__webpack_require__(2);
 	__webpack_require__(7);
-	__webpack_require__(8);
+	__webpack_require__(2);
+	__webpack_require__(3);
 	var Gallery = __webpack_require__(4);
 
 	var galleryLinks = {
-	  '../assets/rest7.jpg': __webpack_require__(9),
-	  '../assets/asonov1.jpg': __webpack_require__(10),
-	  '../assets/asonov2.jpg': __webpack_require__(11),
-	  '../assets/bbq1.jpg': __webpack_require__(12),
-	  '../assets/natekin.jpg': __webpack_require__(13),
-	  '../assets/lifshits.jpg': __webpack_require__(14),
-	  '../assets/dmitriev1.jpg': __webpack_require__(15),
-	  '../assets/domanski.jpg': __webpack_require__(16),
-	  '../assets/gumerov2.jpg': __webpack_require__(17),
-	  '../assets/bbq2.jpg': __webpack_require__(18),
-	  '../assets/nerd.jpg': __webpack_require__(19),
-	  '../assets/rest8.jpg': __webpack_require__(20),
-	  '../assets/rest1.jpg': __webpack_require__(21),
-	  '../assets/rest4.jpg': __webpack_require__(22)
+	  '../assets/rest7.jpg': __webpack_require__(10),
+	  '../assets/asonov1.jpg': __webpack_require__(11),
+	  '../assets/asonov2.jpg': __webpack_require__(12),
+	  '../assets/bbq1.jpg': __webpack_require__(13),
+	  '../assets/natekin.jpg': __webpack_require__(14),
+	  '../assets/lifshits.jpg': __webpack_require__(15),
+	  '../assets/dmitriev1.jpg': __webpack_require__(16),
+	  '../assets/domanski.jpg': __webpack_require__(17),
+	  '../assets/gumerov2.jpg': __webpack_require__(18),
+	  '../assets/bbq2.jpg': __webpack_require__(19),
+	  '../assets/nerd.jpg': __webpack_require__(20),
+	  '../assets/rest8.jpg': __webpack_require__(21),
+	  '../assets/rest1.jpg': __webpack_require__(22),
+	  '../assets/rest4.jpg': __webpack_require__(23)
 	};
 
 	$(function () {
-	  $(document.body).append(__webpack_require__(23));
+	  $(document.body).append(__webpack_require__(24));
 	  /**
 	   * Skrollr inits sticky header with status and animated arrows
 	   *  var skrollr = require('skrollr');
@@ -128,31 +128,490 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
+	/* ========================================================================
+	 * Bootstrap: modal.js v3.3.2
+	 * http://getbootstrap.com/javascript/#modals
+	 * ========================================================================
+	 * Copyright 2011-2015 Twitter, Inc.
+	 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+	 * ======================================================================== */
 
-	// load the styles
-	var content = __webpack_require__(3);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(24)(content, {});
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/css-loader/index.js!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/blueimp-gallery/css/blueimp-gallery.css", function() {
-			var newContent = require("!!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/css-loader/index.js!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/blueimp-gallery/css/blueimp-gallery.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+
+	+function ($) {
+	  'use strict';
+
+	  // MODAL CLASS DEFINITION
+	  // ======================
+
+	  var Modal = function (element, options) {
+	    this.options        = options
+	    this.$body          = $(document.body)
+	    this.$element       = $(element)
+	    this.$backdrop      =
+	    this.isShown        = null
+	    this.scrollbarWidth = 0
+
+	    if (this.options.remote) {
+	      this.$element
+	        .find('.modal-content')
+	        .load(this.options.remote, $.proxy(function () {
+	          this.$element.trigger('loaded.bs.modal')
+	        }, this))
+	    }
+	  }
+
+	  Modal.VERSION  = '3.3.2'
+
+	  Modal.TRANSITION_DURATION = 300
+	  Modal.BACKDROP_TRANSITION_DURATION = 150
+
+	  Modal.DEFAULTS = {
+	    backdrop: true,
+	    keyboard: true,
+	    show: true
+	  }
+
+	  Modal.prototype.toggle = function (_relatedTarget) {
+	    return this.isShown ? this.hide() : this.show(_relatedTarget)
+	  }
+
+	  Modal.prototype.show = function (_relatedTarget) {
+	    var that = this
+	    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+
+	    this.$element.trigger(e)
+
+	    if (this.isShown || e.isDefaultPrevented()) return
+
+	    this.isShown = true
+
+	    this.checkScrollbar()
+	    this.setScrollbar()
+	    this.$body.addClass('modal-open')
+
+	    this.escape()
+	    this.resize()
+
+	    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+
+	    this.backdrop(function () {
+	      var transition = $.support.transition && that.$element.hasClass('fade')
+
+	      if (!that.$element.parent().length) {
+	        that.$element.appendTo(that.$body) // don't move modals dom position
+	      }
+
+	      that.$element
+	        .show()
+	        .scrollTop(0)
+
+	      if (that.options.backdrop) that.adjustBackdrop()
+	      that.adjustDialog()
+
+	      if (transition) {
+	        that.$element[0].offsetWidth // force reflow
+	      }
+
+	      that.$element
+	        .addClass('in')
+	        .attr('aria-hidden', false)
+
+	      that.enforceFocus()
+
+	      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
+
+	      transition ?
+	        that.$element.find('.modal-dialog') // wait for modal to slide in
+	          .one('bsTransitionEnd', function () {
+	            that.$element.trigger('focus').trigger(e)
+	          })
+	          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+	        that.$element.trigger('focus').trigger(e)
+	    })
+	  }
+
+	  Modal.prototype.hide = function (e) {
+	    if (e) e.preventDefault()
+
+	    e = $.Event('hide.bs.modal')
+
+	    this.$element.trigger(e)
+
+	    if (!this.isShown || e.isDefaultPrevented()) return
+
+	    this.isShown = false
+
+	    this.escape()
+	    this.resize()
+
+	    $(document).off('focusin.bs.modal')
+
+	    this.$element
+	      .removeClass('in')
+	      .attr('aria-hidden', true)
+	      .off('click.dismiss.bs.modal')
+
+	    $.support.transition && this.$element.hasClass('fade') ?
+	      this.$element
+	        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
+	        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+	      this.hideModal()
+	  }
+
+	  Modal.prototype.enforceFocus = function () {
+	    $(document)
+	      .off('focusin.bs.modal') // guard against infinite focus loop
+	      .on('focusin.bs.modal', $.proxy(function (e) {
+	        if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
+	          this.$element.trigger('focus')
+	        }
+	      }, this))
+	  }
+
+	  Modal.prototype.escape = function () {
+	    if (this.isShown && this.options.keyboard) {
+	      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
+	        e.which == 27 && this.hide()
+	      }, this))
+	    } else if (!this.isShown) {
+	      this.$element.off('keydown.dismiss.bs.modal')
+	    }
+	  }
+
+	  Modal.prototype.resize = function () {
+	    if (this.isShown) {
+	      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
+	    } else {
+	      $(window).off('resize.bs.modal')
+	    }
+	  }
+
+	  Modal.prototype.hideModal = function () {
+	    var that = this
+	    this.$element.hide()
+	    this.backdrop(function () {
+	      that.$body.removeClass('modal-open')
+	      that.resetAdjustments()
+	      that.resetScrollbar()
+	      that.$element.trigger('hidden.bs.modal')
+	    })
+	  }
+
+	  Modal.prototype.removeBackdrop = function () {
+	    this.$backdrop && this.$backdrop.remove()
+	    this.$backdrop = null
+	  }
+
+	  Modal.prototype.backdrop = function (callback) {
+	    var that = this
+	    var animate = this.$element.hasClass('fade') ? 'fade' : ''
+
+	    if (this.isShown && this.options.backdrop) {
+	      var doAnimate = $.support.transition && animate
+
+	      this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+	        .prependTo(this.$element)
+	        .on('click.dismiss.bs.modal', $.proxy(function (e) {
+	          if (e.target !== e.currentTarget) return
+	          this.options.backdrop == 'static'
+	            ? this.$element[0].focus.call(this.$element[0])
+	            : this.hide.call(this)
+	        }, this))
+
+	      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+
+	      this.$backdrop.addClass('in')
+
+	      if (!callback) return
+
+	      doAnimate ?
+	        this.$backdrop
+	          .one('bsTransitionEnd', callback)
+	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+	        callback()
+
+	    } else if (!this.isShown && this.$backdrop) {
+	      this.$backdrop.removeClass('in')
+
+	      var callbackRemove = function () {
+	        that.removeBackdrop()
+	        callback && callback()
+	      }
+	      $.support.transition && this.$element.hasClass('fade') ?
+	        this.$backdrop
+	          .one('bsTransitionEnd', callbackRemove)
+	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+	        callbackRemove()
+
+	    } else if (callback) {
+	      callback()
+	    }
+	  }
+
+	  // these following methods are used to handle overflowing modals
+
+	  Modal.prototype.handleUpdate = function () {
+	    if (this.options.backdrop) this.adjustBackdrop()
+	    this.adjustDialog()
+	  }
+
+	  Modal.prototype.adjustBackdrop = function () {
+	    this.$backdrop
+	      .css('height', 0)
+	      .css('height', this.$element[0].scrollHeight)
+	  }
+
+	  Modal.prototype.adjustDialog = function () {
+	    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
+
+	    this.$element.css({
+	      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
+	      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
+	    })
+	  }
+
+	  Modal.prototype.resetAdjustments = function () {
+	    this.$element.css({
+	      paddingLeft: '',
+	      paddingRight: ''
+	    })
+	  }
+
+	  Modal.prototype.checkScrollbar = function () {
+	    this.bodyIsOverflowing = document.body.scrollHeight > document.documentElement.clientHeight
+	    this.scrollbarWidth = this.measureScrollbar()
+	  }
+
+	  Modal.prototype.setScrollbar = function () {
+	    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
+	    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
+	  }
+
+	  Modal.prototype.resetScrollbar = function () {
+	    this.$body.css('padding-right', '')
+	  }
+
+	  Modal.prototype.measureScrollbar = function () { // thx walsh
+	    var scrollDiv = document.createElement('div')
+	    scrollDiv.className = 'modal-scrollbar-measure'
+	    this.$body.append(scrollDiv)
+	    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
+	    this.$body[0].removeChild(scrollDiv)
+	    return scrollbarWidth
+	  }
+
+
+	  // MODAL PLUGIN DEFINITION
+	  // =======================
+
+	  function Plugin(option, _relatedTarget) {
+	    return this.each(function () {
+	      var $this   = $(this)
+	      var data    = $this.data('bs.modal')
+	      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+	      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
+	      if (typeof option == 'string') data[option](_relatedTarget)
+	      else if (options.show) data.show(_relatedTarget)
+	    })
+	  }
+
+	  var old = $.fn.modal
+
+	  $.fn.modal             = Plugin
+	  $.fn.modal.Constructor = Modal
+
+
+	  // MODAL NO CONFLICT
+	  // =================
+
+	  $.fn.modal.noConflict = function () {
+	    $.fn.modal = old
+	    return this
+	  }
+
+
+	  // MODAL DATA-API
+	  // ==============
+
+	  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
+	    var $this   = $(this)
+	    var href    = $this.attr('href')
+	    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
+	    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+
+	    if ($this.is('a')) e.preventDefault()
+
+	    $target.one('show.bs.modal', function (showEvent) {
+	      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
+	      $target.one('hidden.bs.modal', function () {
+	        $this.is(':visible') && $this.trigger('focus')
+	      })
+	    })
+	    Plugin.call($target, option, this)
+	  })
+
+	}(jQuery);
+
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(26)();
-	exports.push([module.id, "@charset \"UTF-8\";\n/*\n * blueimp Gallery CSS 2.11.1\n * https://github.com/blueimp/Gallery\n *\n * Copyright 2013, Sebastian Tschan\n * https://blueimp.net\n *\n * Licensed under the MIT license:\n * http://www.opensource.org/licenses/MIT\n */\n\n.blueimp-gallery,\n.blueimp-gallery > .slides > .slide > .slide-content {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  /* Prevent artifacts in Mozilla Firefox: */\n  -moz-backface-visibility: hidden;\n}\n.blueimp-gallery > .slides > .slide > .slide-content {\n  margin: auto;\n  width: auto;\n  height: auto;\n  max-width: 100%;\n  max-height: 100%;\n  opacity: 1;\n}\n.blueimp-gallery {\n  position: fixed;\n  z-index: 999999;\n  overflow: hidden;\n  background: #000;\n  background: rgba(0, 0, 0, 0.9);\n  opacity: 0;\n  display: none;\n  direction: ltr;\n  -ms-touch-action: none;\n  touch-action: none;\n}\n.blueimp-gallery-carousel {\n  position: relative;\n  z-index: auto;\n  margin: 1em auto;\n  /* Set the carousel width/height ratio to 16/9: */\n  padding-bottom: 56.25%;\n  box-shadow: 0 0 10px #000;\n  -ms-touch-action: pan-y;\n  touch-action: pan-y;\n}\n.blueimp-gallery-display {\n  display: block;\n  opacity: 1;\n}\n.blueimp-gallery > .slides {\n  position: relative;\n  height: 100%;\n  overflow: hidden;\n}\n.blueimp-gallery-carousel > .slides {\n  position: absolute;\n}\n.blueimp-gallery > .slides > .slide {\n  position: relative;\n  float: left;\n  height: 100%;\n  text-align: center;\n  -webkit-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n     -moz-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n      -ms-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n       -o-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n          transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);\n}\n.blueimp-gallery,\n.blueimp-gallery > .slides > .slide > .slide-content {\n  -webkit-transition: opacity 0.5s linear;\n     -moz-transition: opacity 0.5s linear;\n      -ms-transition: opacity 0.5s linear;\n       -o-transition: opacity 0.5s linear;\n          transition: opacity 0.5s linear;\n}\n.blueimp-gallery > .slides > .slide-loading {\n  background: url("+__webpack_require__(41)+") center no-repeat;\n  background-size: 64px 64px;\n}\n.blueimp-gallery > .slides > .slide-loading > .slide-content {\n  opacity: 0;\n}\n.blueimp-gallery > .slides > .slide-error {\n  background: url("+__webpack_require__(42)+") center no-repeat;\n}\n.blueimp-gallery > .slides > .slide-error > .slide-content {\n  display: none;\n}\n.blueimp-gallery > .prev,\n.blueimp-gallery > .next {\n  position: absolute;\n  top: 50%;\n  left: 15px;\n  width: 40px;\n  height: 40px;\n  margin-top: -23px;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 60px;\n  font-weight: 100;\n  line-height: 30px;\n  color: #fff;\n  text-decoration: none;\n  text-shadow: 0 0 2px #000;\n  text-align: center;\n  background: #222;\n  background: rgba(0, 0, 0, 0.5);\n  -webkit-box-sizing: content-box;\n     -moz-box-sizing: content-box;\n          box-sizing: content-box;\n  border: 3px solid #fff;\n  -webkit-border-radius: 23px;\n     -moz-border-radius: 23px;\n          border-radius: 23px;\n  opacity: 0.5;\n  cursor: pointer;\n  display: none;\n}\n.blueimp-gallery > .next {\n  left: auto;\n  right: 15px;\n}\n.blueimp-gallery > .close,\n.blueimp-gallery > .title {\n  position: absolute;\n  top: 15px;\n  left: 15px;\n  margin: 0 40px 0 0;\n  font-size: 20px;\n  line-height: 30px;\n  color: #fff;\n  text-shadow: 0 0 2px #000;\n  opacity: 0.8;\n  display: none;\n}\n.blueimp-gallery > .close {\n  padding: 15px;\n  right: 15px;\n  left: auto;\n  margin: -15px;\n  font-size: 30px;\n  text-decoration: none;\n  cursor: pointer;\n}\n.blueimp-gallery > .play-pause {\n  position: absolute;\n  right: 15px;\n  bottom: 15px;\n  width: 15px;\n  height: 15px;\n  background: url("+__webpack_require__(43)+") 0 0 no-repeat;\n  cursor: pointer;\n  opacity: 0.5;\n  display: none;\n}\n.blueimp-gallery-playing > .play-pause {\n  background-position: -15px 0;\n}\n.blueimp-gallery > .prev:hover,\n.blueimp-gallery > .next:hover,\n.blueimp-gallery > .close:hover,\n.blueimp-gallery > .title:hover,\n.blueimp-gallery > .play-pause:hover {\n  color: #fff;\n  opacity: 1;\n}\n.blueimp-gallery-controls > .prev,\n.blueimp-gallery-controls > .next,\n.blueimp-gallery-controls > .close,\n.blueimp-gallery-controls > .title,\n.blueimp-gallery-controls > .play-pause {\n  display: block;\n  /* Fix z-index issues (controls behind slide element) on Android: */\n  -webkit-transform: translateZ(0);\n     -moz-transform: translateZ(0);\n      -ms-transform: translateZ(0);\n       -o-transform: translateZ(0);\n          transform: translateZ(0);\n}\n.blueimp-gallery-single > .prev,\n.blueimp-gallery-left > .prev,\n.blueimp-gallery-single > .next,\n.blueimp-gallery-right > .next,\n.blueimp-gallery-single > .play-pause {\n  display: none;\n}\n.blueimp-gallery > .slides > .slide > .slide-content,\n.blueimp-gallery > .prev,\n.blueimp-gallery > .next,\n.blueimp-gallery > .close,\n.blueimp-gallery > .play-pause {\n  -webkit-user-select: none;\n   -khtml-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n/* Replace PNGs with SVGs for capable browsers (excluding IE<9) */\nbody:last-child .blueimp-gallery > .slides > .slide-error {\n  background-image: url("+__webpack_require__(44)+");\n}\nbody:last-child .blueimp-gallery > .play-pause {\n  width: 20px;\n  height: 20px;\n  background-size: 40px 20px;\n  background-image: url("+__webpack_require__(45)+");\n}\nbody:last-child .blueimp-gallery-playing > .play-pause {\n  background-position: -20px 0;\n}\n\n/* IE7 fixes */\n*+html .blueimp-gallery > .slides > .slide {\n  min-height: 300px;\n}\n*+html .blueimp-gallery > .slides > .slide > .slide-content {\n  position: relative;\n}\n", ""]);
+	/* ========================================================================
+	 * Bootstrap: tab.js v3.3.2
+	 * http://getbootstrap.com/javascript/#tabs
+	 * ========================================================================
+	 * Copyright 2011-2015 Twitter, Inc.
+	 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+	 * ======================================================================== */
+
+
+	+function ($) {
+	  'use strict';
+
+	  // TAB CLASS DEFINITION
+	  // ====================
+
+	  var Tab = function (element) {
+	    this.element = $(element)
+	  }
+
+	  Tab.VERSION = '3.3.2'
+
+	  Tab.TRANSITION_DURATION = 150
+
+	  Tab.prototype.show = function () {
+	    var $this    = this.element
+	    var $ul      = $this.closest('ul:not(.dropdown-menu)')
+	    var selector = $this.data('target')
+
+	    if (!selector) {
+	      selector = $this.attr('href')
+	      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+	    }
+
+	    if ($this.parent('li').hasClass('active')) return
+
+	    var $previous = $ul.find('.active:last a')
+	    var hideEvent = $.Event('hide.bs.tab', {
+	      relatedTarget: $this[0]
+	    })
+	    var showEvent = $.Event('show.bs.tab', {
+	      relatedTarget: $previous[0]
+	    })
+
+	    $previous.trigger(hideEvent)
+	    $this.trigger(showEvent)
+
+	    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
+
+	    var $target = $(selector)
+
+	    this.activate($this.closest('li'), $ul)
+	    this.activate($target, $target.parent(), function () {
+	      $previous.trigger({
+	        type: 'hidden.bs.tab',
+	        relatedTarget: $this[0]
+	      })
+	      $this.trigger({
+	        type: 'shown.bs.tab',
+	        relatedTarget: $previous[0]
+	      })
+	    })
+	  }
+
+	  Tab.prototype.activate = function (element, container, callback) {
+	    var $active    = container.find('> .active')
+	    var transition = callback
+	      && $.support.transition
+	      && (($active.length && $active.hasClass('fade')) || !!container.find('> .fade').length)
+
+	    function next() {
+	      $active
+	        .removeClass('active')
+	        .find('> .dropdown-menu > .active')
+	          .removeClass('active')
+	        .end()
+	        .find('[data-toggle="tab"]')
+	          .attr('aria-expanded', false)
+
+	      element
+	        .addClass('active')
+	        .find('[data-toggle="tab"]')
+	          .attr('aria-expanded', true)
+
+	      if (transition) {
+	        element[0].offsetWidth // reflow for transition
+	        element.addClass('in')
+	      } else {
+	        element.removeClass('fade')
+	      }
+
+	      if (element.parent('.dropdown-menu')) {
+	        element
+	          .closest('li.dropdown')
+	            .addClass('active')
+	          .end()
+	          .find('[data-toggle="tab"]')
+	            .attr('aria-expanded', true)
+	      }
+
+	      callback && callback()
+	    }
+
+	    $active.length && transition ?
+	      $active
+	        .one('bsTransitionEnd', next)
+	        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
+	      next()
+
+	    $active.removeClass('in')
+	  }
+
+
+	  // TAB PLUGIN DEFINITION
+	  // =====================
+
+	  function Plugin(option) {
+	    return this.each(function () {
+	      var $this = $(this)
+	      var data  = $this.data('bs.tab')
+
+	      if (!data) $this.data('bs.tab', (data = new Tab(this)))
+	      if (typeof option == 'string') data[option]()
+	    })
+	  }
+
+	  var old = $.fn.tab
+
+	  $.fn.tab             = Plugin
+	  $.fn.tab.Constructor = Tab
+
+
+	  // TAB NO CONFLICT
+	  // ===============
+
+	  $.fn.tab.noConflict = function () {
+	    $.fn.tab = old
+	    return this
+	  }
+
+
+	  // TAB DATA-API
+	  // ============
+
+	  var clickHandler = function (e) {
+	    e.preventDefault()
+	    Plugin.call($(this), 'show')
+	  }
+
+	  $(document)
+	    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
+	    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
+
+	}(jQuery);
+
 
 /***/ },
 /* 4 */
@@ -1511,7 +1970,7 @@
 	var content = __webpack_require__(6);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(24)(content, {});
+	var update = __webpack_require__(9)(content, {});
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
@@ -1536,583 +1995,34 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* ========================================================================
-	 * Bootstrap: modal.js v3.3.2
-	 * http://getbootstrap.com/javascript/#modals
-	 * ========================================================================
-	 * Copyright 2011-2015 Twitter, Inc.
-	 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-	 * ======================================================================== */
-
-
-	+function ($) {
-	  'use strict';
-
-	  // MODAL CLASS DEFINITION
-	  // ======================
-
-	  var Modal = function (element, options) {
-	    this.options        = options
-	    this.$body          = $(document.body)
-	    this.$element       = $(element)
-	    this.$backdrop      =
-	    this.isShown        = null
-	    this.scrollbarWidth = 0
-
-	    if (this.options.remote) {
-	      this.$element
-	        .find('.modal-content')
-	        .load(this.options.remote, $.proxy(function () {
-	          this.$element.trigger('loaded.bs.modal')
-	        }, this))
-	    }
-	  }
-
-	  Modal.VERSION  = '3.3.2'
-
-	  Modal.TRANSITION_DURATION = 300
-	  Modal.BACKDROP_TRANSITION_DURATION = 150
-
-	  Modal.DEFAULTS = {
-	    backdrop: true,
-	    keyboard: true,
-	    show: true
-	  }
-
-	  Modal.prototype.toggle = function (_relatedTarget) {
-	    return this.isShown ? this.hide() : this.show(_relatedTarget)
-	  }
-
-	  Modal.prototype.show = function (_relatedTarget) {
-	    var that = this
-	    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
-
-	    this.$element.trigger(e)
-
-	    if (this.isShown || e.isDefaultPrevented()) return
-
-	    this.isShown = true
-
-	    this.checkScrollbar()
-	    this.setScrollbar()
-	    this.$body.addClass('modal-open')
-
-	    this.escape()
-	    this.resize()
-
-	    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
-
-	    this.backdrop(function () {
-	      var transition = $.support.transition && that.$element.hasClass('fade')
-
-	      if (!that.$element.parent().length) {
-	        that.$element.appendTo(that.$body) // don't move modals dom position
-	      }
-
-	      that.$element
-	        .show()
-	        .scrollTop(0)
-
-	      if (that.options.backdrop) that.adjustBackdrop()
-	      that.adjustDialog()
-
-	      if (transition) {
-	        that.$element[0].offsetWidth // force reflow
-	      }
-
-	      that.$element
-	        .addClass('in')
-	        .attr('aria-hidden', false)
-
-	      that.enforceFocus()
-
-	      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
-
-	      transition ?
-	        that.$element.find('.modal-dialog') // wait for modal to slide in
-	          .one('bsTransitionEnd', function () {
-	            that.$element.trigger('focus').trigger(e)
-	          })
-	          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-	        that.$element.trigger('focus').trigger(e)
-	    })
-	  }
-
-	  Modal.prototype.hide = function (e) {
-	    if (e) e.preventDefault()
-
-	    e = $.Event('hide.bs.modal')
-
-	    this.$element.trigger(e)
-
-	    if (!this.isShown || e.isDefaultPrevented()) return
-
-	    this.isShown = false
-
-	    this.escape()
-	    this.resize()
-
-	    $(document).off('focusin.bs.modal')
-
-	    this.$element
-	      .removeClass('in')
-	      .attr('aria-hidden', true)
-	      .off('click.dismiss.bs.modal')
-
-	    $.support.transition && this.$element.hasClass('fade') ?
-	      this.$element
-	        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
-	        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-	      this.hideModal()
-	  }
-
-	  Modal.prototype.enforceFocus = function () {
-	    $(document)
-	      .off('focusin.bs.modal') // guard against infinite focus loop
-	      .on('focusin.bs.modal', $.proxy(function (e) {
-	        if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
-	          this.$element.trigger('focus')
-	        }
-	      }, this))
-	  }
-
-	  Modal.prototype.escape = function () {
-	    if (this.isShown && this.options.keyboard) {
-	      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
-	        e.which == 27 && this.hide()
-	      }, this))
-	    } else if (!this.isShown) {
-	      this.$element.off('keydown.dismiss.bs.modal')
-	    }
-	  }
-
-	  Modal.prototype.resize = function () {
-	    if (this.isShown) {
-	      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
-	    } else {
-	      $(window).off('resize.bs.modal')
-	    }
-	  }
-
-	  Modal.prototype.hideModal = function () {
-	    var that = this
-	    this.$element.hide()
-	    this.backdrop(function () {
-	      that.$body.removeClass('modal-open')
-	      that.resetAdjustments()
-	      that.resetScrollbar()
-	      that.$element.trigger('hidden.bs.modal')
-	    })
-	  }
-
-	  Modal.prototype.removeBackdrop = function () {
-	    this.$backdrop && this.$backdrop.remove()
-	    this.$backdrop = null
-	  }
-
-	  Modal.prototype.backdrop = function (callback) {
-	    var that = this
-	    var animate = this.$element.hasClass('fade') ? 'fade' : ''
-
-	    if (this.isShown && this.options.backdrop) {
-	      var doAnimate = $.support.transition && animate
-
-	      this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
-	        .prependTo(this.$element)
-	        .on('click.dismiss.bs.modal', $.proxy(function (e) {
-	          if (e.target !== e.currentTarget) return
-	          this.options.backdrop == 'static'
-	            ? this.$element[0].focus.call(this.$element[0])
-	            : this.hide.call(this)
-	        }, this))
-
-	      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
-
-	      this.$backdrop.addClass('in')
-
-	      if (!callback) return
-
-	      doAnimate ?
-	        this.$backdrop
-	          .one('bsTransitionEnd', callback)
-	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-	        callback()
-
-	    } else if (!this.isShown && this.$backdrop) {
-	      this.$backdrop.removeClass('in')
-
-	      var callbackRemove = function () {
-	        that.removeBackdrop()
-	        callback && callback()
-	      }
-	      $.support.transition && this.$element.hasClass('fade') ?
-	        this.$backdrop
-	          .one('bsTransitionEnd', callbackRemove)
-	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-	        callbackRemove()
-
-	    } else if (callback) {
-	      callback()
-	    }
-	  }
-
-	  // these following methods are used to handle overflowing modals
-
-	  Modal.prototype.handleUpdate = function () {
-	    if (this.options.backdrop) this.adjustBackdrop()
-	    this.adjustDialog()
-	  }
-
-	  Modal.prototype.adjustBackdrop = function () {
-	    this.$backdrop
-	      .css('height', 0)
-	      .css('height', this.$element[0].scrollHeight)
-	  }
-
-	  Modal.prototype.adjustDialog = function () {
-	    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
-
-	    this.$element.css({
-	      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
-	      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
-	    })
-	  }
-
-	  Modal.prototype.resetAdjustments = function () {
-	    this.$element.css({
-	      paddingLeft: '',
-	      paddingRight: ''
-	    })
-	  }
-
-	  Modal.prototype.checkScrollbar = function () {
-	    this.bodyIsOverflowing = document.body.scrollHeight > document.documentElement.clientHeight
-	    this.scrollbarWidth = this.measureScrollbar()
-	  }
-
-	  Modal.prototype.setScrollbar = function () {
-	    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
-	    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
-	  }
-
-	  Modal.prototype.resetScrollbar = function () {
-	    this.$body.css('padding-right', '')
-	  }
-
-	  Modal.prototype.measureScrollbar = function () { // thx walsh
-	    var scrollDiv = document.createElement('div')
-	    scrollDiv.className = 'modal-scrollbar-measure'
-	    this.$body.append(scrollDiv)
-	    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
-	    this.$body[0].removeChild(scrollDiv)
-	    return scrollbarWidth
-	  }
-
-
-	  // MODAL PLUGIN DEFINITION
-	  // =======================
-
-	  function Plugin(option, _relatedTarget) {
-	    return this.each(function () {
-	      var $this   = $(this)
-	      var data    = $this.data('bs.modal')
-	      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-	      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
-	      if (typeof option == 'string') data[option](_relatedTarget)
-	      else if (options.show) data.show(_relatedTarget)
-	    })
-	  }
-
-	  var old = $.fn.modal
-
-	  $.fn.modal             = Plugin
-	  $.fn.modal.Constructor = Modal
-
-
-	  // MODAL NO CONFLICT
-	  // =================
-
-	  $.fn.modal.noConflict = function () {
-	    $.fn.modal = old
-	    return this
-	  }
-
-
-	  // MODAL DATA-API
-	  // ==============
-
-	  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
-	    var $this   = $(this)
-	    var href    = $this.attr('href')
-	    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
-	    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
-
-	    if ($this.is('a')) e.preventDefault()
-
-	    $target.one('show.bs.modal', function (showEvent) {
-	      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
-	      $target.one('hidden.bs.modal', function () {
-	        $this.is(':visible') && $this.trigger('focus')
-	      })
-	    })
-	    Plugin.call($target, option, this)
-	  })
-
-	}(jQuery);
-
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(8);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		module.hot.accept("!!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/css-loader/index.js!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/blueimp-gallery/css/blueimp-gallery.css", function() {
+			var newContent = require("!!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/css-loader/index.js!/Users/Katerina/Documents/gamechangers/nerdcamp15/nerdcamp-webpack/node_modules/blueimp-gallery/css/blueimp-gallery.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* ========================================================================
-	 * Bootstrap: tab.js v3.3.2
-	 * http://getbootstrap.com/javascript/#tabs
-	 * ========================================================================
-	 * Copyright 2011-2015 Twitter, Inc.
-	 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-	 * ======================================================================== */
-
-
-	+function ($) {
-	  'use strict';
-
-	  // TAB CLASS DEFINITION
-	  // ====================
-
-	  var Tab = function (element) {
-	    this.element = $(element)
-	  }
-
-	  Tab.VERSION = '3.3.2'
-
-	  Tab.TRANSITION_DURATION = 150
-
-	  Tab.prototype.show = function () {
-	    var $this    = this.element
-	    var $ul      = $this.closest('ul:not(.dropdown-menu)')
-	    var selector = $this.data('target')
-
-	    if (!selector) {
-	      selector = $this.attr('href')
-	      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-	    }
-
-	    if ($this.parent('li').hasClass('active')) return
-
-	    var $previous = $ul.find('.active:last a')
-	    var hideEvent = $.Event('hide.bs.tab', {
-	      relatedTarget: $this[0]
-	    })
-	    var showEvent = $.Event('show.bs.tab', {
-	      relatedTarget: $previous[0]
-	    })
-
-	    $previous.trigger(hideEvent)
-	    $this.trigger(showEvent)
-
-	    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
-
-	    var $target = $(selector)
-
-	    this.activate($this.closest('li'), $ul)
-	    this.activate($target, $target.parent(), function () {
-	      $previous.trigger({
-	        type: 'hidden.bs.tab',
-	        relatedTarget: $this[0]
-	      })
-	      $this.trigger({
-	        type: 'shown.bs.tab',
-	        relatedTarget: $previous[0]
-	      })
-	    })
-	  }
-
-	  Tab.prototype.activate = function (element, container, callback) {
-	    var $active    = container.find('> .active')
-	    var transition = callback
-	      && $.support.transition
-	      && (($active.length && $active.hasClass('fade')) || !!container.find('> .fade').length)
-
-	    function next() {
-	      $active
-	        .removeClass('active')
-	        .find('> .dropdown-menu > .active')
-	          .removeClass('active')
-	        .end()
-	        .find('[data-toggle="tab"]')
-	          .attr('aria-expanded', false)
-
-	      element
-	        .addClass('active')
-	        .find('[data-toggle="tab"]')
-	          .attr('aria-expanded', true)
-
-	      if (transition) {
-	        element[0].offsetWidth // reflow for transition
-	        element.addClass('in')
-	      } else {
-	        element.removeClass('fade')
-	      }
-
-	      if (element.parent('.dropdown-menu')) {
-	        element
-	          .closest('li.dropdown')
-	            .addClass('active')
-	          .end()
-	          .find('[data-toggle="tab"]')
-	            .attr('aria-expanded', true)
-	      }
-
-	      callback && callback()
-	    }
-
-	    $active.length && transition ?
-	      $active
-	        .one('bsTransitionEnd', next)
-	        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
-	      next()
-
-	    $active.removeClass('in')
-	  }
-
-
-	  // TAB PLUGIN DEFINITION
-	  // =====================
-
-	  function Plugin(option) {
-	    return this.each(function () {
-	      var $this = $(this)
-	      var data  = $this.data('bs.tab')
-
-	      if (!data) $this.data('bs.tab', (data = new Tab(this)))
-	      if (typeof option == 'string') data[option]()
-	    })
-	  }
-
-	  var old = $.fn.tab
-
-	  $.fn.tab             = Plugin
-	  $.fn.tab.Constructor = Tab
-
-
-	  // TAB NO CONFLICT
-	  // ===============
-
-	  $.fn.tab.noConflict = function () {
-	    $.fn.tab = old
-	    return this
-	  }
-
-
-	  // TAB DATA-API
-	  // ============
-
-	  var clickHandler = function (e) {
-	    e.preventDefault()
-	    Plugin.call($(this), 'show')
-	  }
-
-	  $(document)
-	    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
-	    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
-
-	}(jQuery);
-
+	exports = module.exports = __webpack_require__(26)();
+	exports.push([module.id, "@charset \"UTF-8\";\n/*\n * blueimp Gallery CSS 2.11.1\n * https://github.com/blueimp/Gallery\n *\n * Copyright 2013, Sebastian Tschan\n * https://blueimp.net\n *\n * Licensed under the MIT license:\n * http://www.opensource.org/licenses/MIT\n */\n\n.blueimp-gallery,\n.blueimp-gallery > .slides > .slide > .slide-content {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  /* Prevent artifacts in Mozilla Firefox: */\n  -moz-backface-visibility: hidden;\n}\n.blueimp-gallery > .slides > .slide > .slide-content {\n  margin: auto;\n  width: auto;\n  height: auto;\n  max-width: 100%;\n  max-height: 100%;\n  opacity: 1;\n}\n.blueimp-gallery {\n  position: fixed;\n  z-index: 999999;\n  overflow: hidden;\n  background: #000;\n  background: rgba(0, 0, 0, 0.9);\n  opacity: 0;\n  display: none;\n  direction: ltr;\n  -ms-touch-action: none;\n  touch-action: none;\n}\n.blueimp-gallery-carousel {\n  position: relative;\n  z-index: auto;\n  margin: 1em auto;\n  /* Set the carousel width/height ratio to 16/9: */\n  padding-bottom: 56.25%;\n  box-shadow: 0 0 10px #000;\n  -ms-touch-action: pan-y;\n  touch-action: pan-y;\n}\n.blueimp-gallery-display {\n  display: block;\n  opacity: 1;\n}\n.blueimp-gallery > .slides {\n  position: relative;\n  height: 100%;\n  overflow: hidden;\n}\n.blueimp-gallery-carousel > .slides {\n  position: absolute;\n}\n.blueimp-gallery > .slides > .slide {\n  position: relative;\n  float: left;\n  height: 100%;\n  text-align: center;\n  -webkit-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n     -moz-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n      -ms-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n       -o-transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); \n          transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);\n}\n.blueimp-gallery,\n.blueimp-gallery > .slides > .slide > .slide-content {\n  -webkit-transition: opacity 0.5s linear;\n     -moz-transition: opacity 0.5s linear;\n      -ms-transition: opacity 0.5s linear;\n       -o-transition: opacity 0.5s linear;\n          transition: opacity 0.5s linear;\n}\n.blueimp-gallery > .slides > .slide-loading {\n  background: url("+__webpack_require__(41)+") center no-repeat;\n  background-size: 64px 64px;\n}\n.blueimp-gallery > .slides > .slide-loading > .slide-content {\n  opacity: 0;\n}\n.blueimp-gallery > .slides > .slide-error {\n  background: url("+__webpack_require__(42)+") center no-repeat;\n}\n.blueimp-gallery > .slides > .slide-error > .slide-content {\n  display: none;\n}\n.blueimp-gallery > .prev,\n.blueimp-gallery > .next {\n  position: absolute;\n  top: 50%;\n  left: 15px;\n  width: 40px;\n  height: 40px;\n  margin-top: -23px;\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-size: 60px;\n  font-weight: 100;\n  line-height: 30px;\n  color: #fff;\n  text-decoration: none;\n  text-shadow: 0 0 2px #000;\n  text-align: center;\n  background: #222;\n  background: rgba(0, 0, 0, 0.5);\n  -webkit-box-sizing: content-box;\n     -moz-box-sizing: content-box;\n          box-sizing: content-box;\n  border: 3px solid #fff;\n  -webkit-border-radius: 23px;\n     -moz-border-radius: 23px;\n          border-radius: 23px;\n  opacity: 0.5;\n  cursor: pointer;\n  display: none;\n}\n.blueimp-gallery > .next {\n  left: auto;\n  right: 15px;\n}\n.blueimp-gallery > .close,\n.blueimp-gallery > .title {\n  position: absolute;\n  top: 15px;\n  left: 15px;\n  margin: 0 40px 0 0;\n  font-size: 20px;\n  line-height: 30px;\n  color: #fff;\n  text-shadow: 0 0 2px #000;\n  opacity: 0.8;\n  display: none;\n}\n.blueimp-gallery > .close {\n  padding: 15px;\n  right: 15px;\n  left: auto;\n  margin: -15px;\n  font-size: 30px;\n  text-decoration: none;\n  cursor: pointer;\n}\n.blueimp-gallery > .play-pause {\n  position: absolute;\n  right: 15px;\n  bottom: 15px;\n  width: 15px;\n  height: 15px;\n  background: url("+__webpack_require__(43)+") 0 0 no-repeat;\n  cursor: pointer;\n  opacity: 0.5;\n  display: none;\n}\n.blueimp-gallery-playing > .play-pause {\n  background-position: -15px 0;\n}\n.blueimp-gallery > .prev:hover,\n.blueimp-gallery > .next:hover,\n.blueimp-gallery > .close:hover,\n.blueimp-gallery > .title:hover,\n.blueimp-gallery > .play-pause:hover {\n  color: #fff;\n  opacity: 1;\n}\n.blueimp-gallery-controls > .prev,\n.blueimp-gallery-controls > .next,\n.blueimp-gallery-controls > .close,\n.blueimp-gallery-controls > .title,\n.blueimp-gallery-controls > .play-pause {\n  display: block;\n  /* Fix z-index issues (controls behind slide element) on Android: */\n  -webkit-transform: translateZ(0);\n     -moz-transform: translateZ(0);\n      -ms-transform: translateZ(0);\n       -o-transform: translateZ(0);\n          transform: translateZ(0);\n}\n.blueimp-gallery-single > .prev,\n.blueimp-gallery-left > .prev,\n.blueimp-gallery-single > .next,\n.blueimp-gallery-right > .next,\n.blueimp-gallery-single > .play-pause {\n  display: none;\n}\n.blueimp-gallery > .slides > .slide > .slide-content,\n.blueimp-gallery > .prev,\n.blueimp-gallery > .next,\n.blueimp-gallery > .close,\n.blueimp-gallery > .play-pause {\n  -webkit-user-select: none;\n   -khtml-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n/* Replace PNGs with SVGs for capable browsers (excluding IE<9) */\nbody:last-child .blueimp-gallery > .slides > .slide-error {\n  background-image: url("+__webpack_require__(44)+");\n}\nbody:last-child .blueimp-gallery > .play-pause {\n  width: 20px;\n  height: 20px;\n  background-size: 40px 20px;\n  background-image: url("+__webpack_require__(45)+");\n}\nbody:last-child .blueimp-gallery-playing > .play-pause {\n  background-position: -20px 0;\n}\n\n/* IE7 fixes */\n*+html .blueimp-gallery > .slides > .slide {\n  min-height: 300px;\n}\n*+html .blueimp-gallery > .slides > .slide > .slide-content {\n  position: relative;\n}\n", ""]);
 
 /***/ },
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "rest7-1c3fb75ff7c9628404e4f9dafaf18104.jpg"
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "asonov1-2b73589e1841bcca39d6fa9b94c755f8.jpg"
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "asonov2-8d0b6137c22b1f52cca1760d782490e5.jpg"
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "bbq1-4b37f7b86b2340668ca7e2a8849ec156.jpg"
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "natekin-b8e04a597c42588a1462cc88fe75b678.jpg"
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "lifshits-c8bd0bd4ea3f636b986758a8ed7a7b67.jpg"
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "dmitriev1-2acc3f64477cc6784cee6833869ca54a.jpg"
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "domanski-04d0a07e0f96957c05a6d625a0167cf4.jpg"
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "gumerov2-ec533084cabf2c47a790d2c6e9a534d6.jpg"
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "bbq2-18b7ca59296aacecad8aa1905fbf15f7.jpg"
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "nerd-0f9aacf2620f5fb4f03e67d0c05d3d9b.jpg"
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "rest8-27470544a59cf4ae0e3418249fbddd70.jpg"
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "rest1-1fde5029c9c4d9abcb3730e311cdbeb0.jpg"
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "rest4-f286bbb4e26bdadd7d398cabff3a93bf.jpg"
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = "<div>\n    <div class=\"nerd-camp__header\">\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Nёrd<font color=\"#d9230f\">|</font>Camp\n                    <small>April 24-26, 2015</small>\n                </h1>\n            </div>\n            <div class=\"nerd-camp__page-sub-header\">\n                <span>co-learning</span>\n                <span>co-working</span>\n                <span>co-resting</span>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-container\">\n            <div class=\"container\">\n                <div class=\"navbar navbar-inverse\" role=\"navigation\">\n\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"#schedule\">Schedule</a></li>\n                            <li><a href=\"#key-dates\">Organizational Information</a></li>\n                            <li><a href=\"#participants\">List of Participants</a></li>\n                            <li><a href=\"http://nerdcamp.info/nc2014/\">NёrdCamp'14</a></li>\n                        </ul>\n                        <form class=\"navbar-form navbar-right\">\n                            <!--TODO: uncomment when registration form-->\n                            <!--<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\".nerd-camp__application-form-dlg\">\n                                Application Form\n                            </button>-->\n                        </form>\n                    </div>\n                    <!--/.nav-collapse -->\n\n                    <!--/.container-fluid -->\n                </div>\n                <div class=\"nerd-camp__header-images\">\n                    <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n                </div>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-images\">\n            <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n\n            <div class=\"row\">\n                <div class=\"col-md-7\">\n                    <h3 id=\"about\">About Nёrd<font color=\"#d9230f\">|</font>Camp</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        Nёrd|Camp is a traditional 3-days event in a format of an outdoor weekend.\n                        The word \"Camp\" refers to <a href=\"http://en.wikipedia.org/wiki/BarCamp\">barcamps</a>,\n                        <a href=\"http://en.wikipedia.org/wiki/Foo_Camp\">foo camps</a>.\n                        Its program is formed by participants: specialists from IT industry, scientists and entrepreneurs.\n                        <br/>\n                        Nёrd|Camp has three modes:\n                        <ul>\n                            <li><b>Co-learning:</b> blocks of lectures on modern topics, presented by participants to each\n                                other\n                            </li>\n                            <li><b>Co-working:</b> discussions, workshops</li>\n                            <li><b>Co-resting:</b> outdoor activities, sport exercises every morning, BBQ</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"col-md-4 hidden-sm hidden-print nerd-camp__text-block\">\n                    <div id=\"sidebar\" class=\"nerd-camp__vk-group-container\">\n                        <!-- VK Widget -->\n                        <div id=\"vk_groups\"></div>\n                        <!--<div id=\"mymap\"></div>-->\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <div role=\"tabpanel\" id=\"schedule\" class=\"nerd-camp__text-block nerd-camp__text-block_full-width\">\n\n                        <!-- Nav tabs -->\n                        <ul class=\"nav nav-tabs nerd-camp__nav-tabs\" role=\"tablist\">\n                            <li role=\"presentation\" class=\"active\"><a href=\"#friday\" aria-controls=\"home\" role=\"tab\" data-toggle=\"tab\">Schedule for Friday</a></li>\n                            <li role=\"presentation\"><a href=\"#saturday\" aria-controls=\"profile\" role=\"tab\" data-toggle=\"tab\">Schedule for Saturday</a></li>\n                            <li role=\"presentation\"><a href=\"#sunday\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">Schedule for Sunday</a></li>\n                        </ul>\n\n                        <!-- Tab panes -->\n                        <div class=\"tab-content nerd-camp__tab-content\">\n                            <div role=\"tabpanel\" class=\"tab-pane fade in active\" id=\"friday\">\n                                <div class=\"nerd-camp__text-block\">\n                                    <table class=\"nerd-camp__table nerd-camp__table_no-boarder\">\n                                        <tr>\n                                            <td width=\"150px\"><b>18:00</b></td>\n                                            <td>Bus from metro station \"Ozerki\"</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>20:00 &mdash; 21:00</b></td>\n                                            <td>Dinner</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>21:30 &mdash; 22:15</b></td>\n                                            <td>Welcome talks</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>22:15 &mdash; 00:00</b></td>\n                                            <td>Welcome game (Anna Glotova, Alexander Koshevoy, Victoria Vasilyeva)</td>\n                                        </tr>\n                                    </table>\n                                </div>\n                            </div>\n\n                            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"saturday\">\n                                <div class=\"nerd-camp__text-block\">\n                                    <table class=\"nerd-camp__table nerd-camp__table_no-boarder\">\n                                        <tr>\n                                            <td width=\"150px\"><b>09:30 &mdash; 10:00</b></td>\n                                            <td>Morning workout (Mikhail Vink is responsible)</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>10:00 &mdash; 11:00</b></td>\n                                            <td>Breakfast</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>11:00 &mdash; 12:00</b></td>\n                                            <td>Russian education: from the post-Soviet inertia to the new rules of play (Lilia Zemnuhova)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>12:00 &mdash; 13:00</b></td>\n                                            <td>IT Education as the main driver of regional transformations: Why do regions focus on the same issues but solve them differently? (Alina Kontareva)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>13:00 &mdash; 14:00</b></td>\n                                            <td>About Otkrytie Fest (Anatoly Nikitin)</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>15:00 &mdash; 16:00</b></td>\n                                            <td>Lunch</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>16:00 &mdash; 16:30</b></td>\n                                            <td>Development of intellectual capital in IT companies: Google vs JetBrains (Margarita Kasabutskaya)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>16:30 &mdash; 17:30</b></td>\n                                            <td>Crisis in healthcare &amp; life sciences. How we can solve it with IT, education and politics (Anton Tikhonov)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>17:30 &mdash; 18:30</b></td>\n                                            <td>Discussion: participants's experince in money-talent relationships: sponsorship, scolarship, investments, etc. (Andrey Afanasyev)</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>19:00 &mdash; 20:00</b></td>\n                                            <td>Dinner</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>21:00 &mdash; 01:00</b></td>\n                                            <td>Barbecue Party</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>21:00 &mdash; 22:30</b></td>\n                                            <td>Jeopardy! (Ilya Onskul)</td>\n                                        </tr>\n                                    </table>\n                                </div>\n                            </div>\n\n                            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"sunday\">\n                                <div class=\"nerd-camp__text-block\">\n                                    <table class=\"nerd-camp__table nerd-camp__table_no-boarder\">\n                                        <tr>\n                                            <td width=\"150px\"><b>08:30 &mdash; 09:00</b></td>\n                                            <td>Morning workout (Mikhail Vink is responsible)</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>09:00 &mdash; 10:00</b></td>\n                                            <td>Breakfast</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td width=\"150px\"><b>10:00 &mdash; 10:30</b></td>\n                                            <td>Computer-based math (Gleb Svechnikov)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td width=\"150px\"><b>10:30 &mdash; 15:00</b></td>\n                                            <td>Alternative Edu Projects and Platforms discussion (Dmitry Kalupin &amp; Anton Zeldin)</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>15:00 &mdash; 16:00</b></td>\n                                            <td>Lunch</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>15:30 &mdash; 16:00</b></td>\n                                            <td>Checkout and bus departure</td>\n                                        </tr>\n                                    </table>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"container-fluid nerd-camp__full-width-block\">\n        <div class=\"row nerd-camp_image-gallery\">\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest7.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(27) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(28) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(29) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(30) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/natekin.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(31) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/lifshits.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(32) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/dmitriev1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(33) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n\n            <br/>\n\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/domanski.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(34) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/gumerov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(35) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(36) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/nerd.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(37) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest8.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(38) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(39) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest4.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(40) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n        </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-6 nerd-camp__map-container\">\n                    <span id=\"mymap\"></span>\n                </div>\n                <div class=\"col-md-6\">\n                    <h3 id=\"key-dates\">Organizational Information</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        <div><b>April 5</b>&mdash; Application deadline</div>\n                        <div><b>April 24&ndash;26</b>&mdash; Nёrd|Camp</div>\n                        <div>\n                            <p>Participation fee: <b>7000 ₽</b></p>\n                            <p>Includes:</p>\n                            <ul>\n                                <li>3 days and 2 nights in \"Orekh\"</li>\n                                <li>Transportation to and from the venue</li>\n                                <li>Lodging in separate 4-person houses (2 people per room)</li>\n                                <li>Full meal package (vegetarian options available)</li>\n                                <li>Saturday evening BBQ party</li>\n                            </ul>\n                        </div>\n                    </div>\n                </div>\n            </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h3 id=\"participants\">List of Participants</h3>\n                    <table class=\"nerd-camp__table\">\n                        <tr>\n                            <td>Иван Феофанов, FB Solutions, Owner & Lebedev Physical Institute of the Russian Academy of Science, Researcher</td>\n                            <td>Виктория Васильева, OpenWay, Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Андрей Афанасьев, iBinom, CEO & yCamp, Organizer</td>\n                            <td>Антон Афанасьев, iBinom Inc., Reseacher</td>\n                        </tr>\n                        <tr>\n                            <td>Григорий Фишман, QuantumBrainsCapital, Automated Intelligence Systems</td>\n                            <td>Евгений\tБаландин, Zalivka Mobile, Founder</td>\n                        </tr>\n                        <tr>\n                            <td>Александра Шишова, VimpelCom, Analyst</td>\n                            <td>Илья Онскуль, Deutsche Bank, System Analyst</td>\n                        </tr>\n                        <tr>\n                            <td>Владимир Смирнов, BIOCAD, Bioinformatics Sw Dev</td>\n                            <td>Екатерина Заикина, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Винк, JetBrains, Product Marketing Manager</td>\n                            <td>Алина Контарева, European University, Research Fellow</td>\n                        </tr>\n                        <tr>\n                            <td>Лилия Земнухова, European University, Research Fellow</td>\n                            <td>Яна Сергиевская</td>\n                        </tr>\n                        <tr>\n                            <td>Наталия Лупачева, Openway Service, Senior Support Engineer</td>\n                            <td>Павел Смирнов, ITMO University, Researcher</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Карпов, Manager</td>\n                            <td>Ксения Петрова, Wrike, Growth Product Manager </td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий Орлов, Yandex, Project Manager</td>\n                            <td>Маргарита Касабуцкая, SPbSU, Economic Sociology Department, MA Student</td>\n                        </tr>\n                        <tr>\n                            <td>Елена Индрулинас, Trainee Designer, Legion</td>\n                            <td>Глеб Свечников, Intermedia, Web Designer & 239, Teacher</td>\n                        </tr>\n                        <tr>\n                            <td>Валентина Гулева, Engineer</td>\n                            <td>Зоя\tФедотова, Doctor</td>\n                        </tr>\n                        <tr>\n                            <td>Николай\tКотов, JetBrains. Project Coordinator</td>\n                            <td>Анна Кузьмина, LETI, Assistant Professor</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Кошевой, OpenWay Group, Software Developer</td>\n                            <td>Надежда Петрова, KL10CH</td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий\tПетрашев, Enterprise Product Manager, Wrike</td>\n                            <td>Антон Самойлов, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Доморацкий, ChangeLab, Founder</td>\n                            <td>Анатолий Никитин, JetBrains, Project Lead</td>\n                        </tr>\n                        <tr>\n                            <td>Николай Вяххи, Stepic, Founder</td>\n                            <td>Анастасия Семенюк, VK.com, QA Engineer</td>\n                        </tr>\n                        <tr>\n                            <td>Екатерина Чайкина, Bioinformatics Institute, Coordinator</td>\n                            <td>Анна Львова, Russia-24</td>\n                        </tr>\n                        <tr>\n                            <td>Антон Тихонов, Organic Vaccines, Consultant</td>\n                            <td>Антон Зельдин, Room2room, owner</td>\n                        </tr>\n                        <tr>\n                            <td>Наталья Машьянова, Bioinformatics Institute, Coordinator</td>\n                            <td>Егор Наумов, JetBrains, Project Marketing Manager</td>\n                        </tr>\n                        <tr>\n                            <td>Анна Глотова, Stepic Moscow</td>\n                            <td>Дмитрий Кириллин, Belkasoft, Marketing Director</td>\n                        </tr>\n                        <tr>\n                            <td>Сергей Дмитриев, GameChangers, Founder</td>\n                        </tr>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12 nerd-camp__see-you\">See you soon <font color=\"#d9230f\">;)</font></div>\n        </div>\n\n        <div class=\"modal-footer nerd-camp__footer\">\n            <span>Game<font color=\"#d9230f\">|</font>Changers</span>\n            <span><a href=\"mailto:n.mashyanova@gmail.com\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-envelope-o\"></i>&nbsp;</span>write a letter\n            </a></span>\n            <span><a href=\"http://vk.com/nerdcamp15s\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-vk\"></i>&nbsp;</span>subscribe group\n            </a></span>\n        </div>\n    </div>\n\n    <div id=\"blueimp-gallery\" class=\"blueimp-gallery\">\n        <div class=\"slides\"></div>\n        <h3 class=\"title\"></h3>\n        <a class=\"prev\">‹</a>\n        <a class=\"next\">›</a>\n        <a class=\"close\">×</a>\n        <a class=\"play-pause\"></a>\n        <ol class=\"indicator\"></ol>\n    </div>\n\n    <div class=\"modal nerd-camp__application-form-dlg\" tabindex=\"-1\" role=\"dialog\" labelledby=\"myModalLabel\" aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-md\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header nerd-camp__modal-header_no-border\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n                </div>\n                <div class=\"modal-body\">\n                    <iframe src=\"https://docs.google.com/forms/d/1KSd5NvHOHJqrUfm3tHZrD6KxH-RRMTPtF2IRp38elI4/viewform?embedded=true\" width=\"560\" height=\"450\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\">\n                        Loading...\n                    </iframe>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n";
-
-/***/ },
-/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -2306,6 +2216,96 @@
 		}
 	}
 
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "rest7-1c3fb75ff7c9628404e4f9dafaf18104.jpg"
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "asonov1-2b73589e1841bcca39d6fa9b94c755f8.jpg"
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "asonov2-8d0b6137c22b1f52cca1760d782490e5.jpg"
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "bbq1-4b37f7b86b2340668ca7e2a8849ec156.jpg"
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "natekin-b8e04a597c42588a1462cc88fe75b678.jpg"
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "lifshits-c8bd0bd4ea3f636b986758a8ed7a7b67.jpg"
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "dmitriev1-2acc3f64477cc6784cee6833869ca54a.jpg"
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "domanski-04d0a07e0f96957c05a6d625a0167cf4.jpg"
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "gumerov2-ec533084cabf2c47a790d2c6e9a534d6.jpg"
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "bbq2-18b7ca59296aacecad8aa1905fbf15f7.jpg"
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "nerd-0f9aacf2620f5fb4f03e67d0c05d3d9b.jpg"
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "rest8-27470544a59cf4ae0e3418249fbddd70.jpg"
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "rest1-1fde5029c9c4d9abcb3730e311cdbeb0.jpg"
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "rest4-f286bbb4e26bdadd7d398cabff3a93bf.jpg"
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "<div>\n    <div class=\"nerd-camp__header\">\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Nёrd<font color=\"#d9230f\">|</font>Camp\n                    <small>April 24-26, 2015</small>\n                </h1>\n            </div>\n            <div class=\"nerd-camp__page-sub-header\">\n                <span>co-learning</span>\n                <span>co-working</span>\n                <span>co-resting</span>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-container\">\n            <div class=\"container\">\n                <div class=\"navbar navbar-inverse\" role=\"navigation\">\n\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"#schedule\">Schedule</a></li>\n                            <li><a href=\"#key-dates\">Organizational Information</a></li>\n                            <li><a href=\"#participants\">List of Participants</a></li>\n                            <li><a href=\"http://nerdcamp.info/nc2014/\">NёrdCamp'14</a></li>\n                        </ul>\n                        <form class=\"navbar-form navbar-right\">\n                            <!--TODO: uncomment when registration form-->\n                            <!--<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\".nerd-camp__application-form-dlg\">\n                                Application Form\n                            </button>-->\n                        </form>\n                    </div>\n                    <!--/.nav-collapse -->\n\n                    <!--/.container-fluid -->\n                </div>\n                <div class=\"nerd-camp__header-images\">\n                    <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n                </div>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-images\">\n            <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n\n            <div class=\"row\">\n                <div class=\"col-md-7\">\n                    <h3 id=\"about\">About Nёrd<font color=\"#d9230f\">|</font>Camp</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        Nёrd|Camp is a traditional 3-days event in a format of an outdoor weekend.\n                        The word \"Camp\" refers to <a href=\"http://en.wikipedia.org/wiki/BarCamp\">barcamps</a>,\n                        <a href=\"http://en.wikipedia.org/wiki/Foo_Camp\">foo camps</a>.\n                        Its program is formed by participants: specialists from IT industry, scientists and entrepreneurs.\n                        <br/>\n                        Nёrd|Camp has three modes:\n                        <ul>\n                            <li><b>Co-learning:</b> blocks of lectures on modern topics, presented by participants to each\n                                other\n                            </li>\n                            <li><b>Co-working:</b> discussions, workshops</li>\n                            <li><b>Co-resting:</b> outdoor activities, sport exercises every morning, BBQ</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"col-md-4 hidden-sm hidden-print nerd-camp__text-block\">\n                    <div id=\"sidebar\" class=\"nerd-camp__vk-group-container\">\n                        <!-- VK Widget -->\n                        <div id=\"vk_groups\"></div>\n                        <!--<div id=\"mymap\"></div>-->\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <div role=\"tabpanel\" id=\"schedule\" class=\"nerd-camp__text-block nerd-camp__text-block_full-width\">\n\n                        <!-- Nav tabs -->\n                        <ul class=\"nav nav-tabs nerd-camp__nav-tabs\" role=\"tablist\">\n                            <li role=\"presentation\" class=\"active\"><a href=\"#friday\" aria-controls=\"home\" role=\"tab\" data-toggle=\"tab\">Schedule for Friday</a></li>\n                            <li role=\"presentation\"><a href=\"#saturday\" aria-controls=\"profile\" role=\"tab\" data-toggle=\"tab\">Schedule for Saturday</a></li>\n                            <li role=\"presentation\"><a href=\"#sunday\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">Schedule for Sunday</a></li>\n                        </ul>\n\n                        <!-- Tab panes -->\n                        <div class=\"tab-content nerd-camp__tab-content\">\n                            <div role=\"tabpanel\" class=\"tab-pane fade in active\" id=\"friday\">\n                                <div class=\"nerd-camp__text-block\">\n                                    <table class=\"nerd-camp__table nerd-camp__table_no-boarder\">\n                                        <tr>\n                                            <td width=\"150px\"><b>18:00</b></td>\n                                            <td>Bus from metro station \"Ozerki\"</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>20:00 &mdash; 21:00</b></td>\n                                            <td>Dinner</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>21:30 &mdash; 22:15</b></td>\n                                            <td>Welcome talks (Dmitry Orlov, Nikolay Kotov)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>22:15 &mdash; 00:00</b></td>\n                                            <td>Welcome game (Anna Glotova, Alexander Koshevoy, Victoria Vasilyeva, Natalia Lupacheva)</td>\n                                        </tr>\n                                    </table>\n                                </div>\n                            </div>\n\n                            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"saturday\">\n                                <div class=\"nerd-camp__text-block\">\n                                    <table class=\"nerd-camp__table nerd-camp__table_no-boarder\">\n                                        <tr>\n                                            <td width=\"150px\"><b>09:30 &mdash; 10:00</b></td>\n                                            <td>Morning workout (Mikhail Vink is responsible)</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>10:00 &mdash; 11:00</b></td>\n                                            <td>Breakfast</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>11:00 &mdash; 12:00</b></td>\n                                            <td>Russian education: from the post-Soviet inertia to the new rules of play (Lilia Zemnuhova)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>12:00 &mdash; 13:00</b></td>\n                                            <td>IT Education as the main driver of regional transformations: Why do regions focus on the same issues but solve them differently? (Alina Kontareva)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>13:00 &mdash; 14:00</b></td>\n                                            <td>About Otkrytie Fest (Anatoly Nikitin)</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>15:00 &mdash; 16:00</b></td>\n                                            <td>Lunch</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>16:00 &mdash; 16:30</b></td>\n                                            <td>Development of intellectual capital in IT companies: Google vs JetBrains (Margarita Kasabutskaya)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>16:30 &mdash; 17:30</b></td>\n                                            <td>Crisis in healthcare &amp; life sciences. How we can solve it with IT, education and politics (Anton Tikhonov)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>17:30 &mdash; 18:30</b></td>\n                                            <td>Discussion: participants's experince in money-talent relationships: sponsorship, scolarship, investments, etc. (Andrey Afanasyev)</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>19:00 &mdash; 20:00</b></td>\n                                            <td>Dinner</td>\n                                        </tr>\n                                        <tr>\n                                            <td><b>21:00 &mdash; 01:00</b></td>\n                                            <td>Barbecue Party</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td><b>21:00 &mdash; 22:30</b></td>\n                                            <td>Jeopardy! (Ilya Onskul)</td>\n                                        </tr>\n                                    </table>\n                                </div>\n                            </div>\n\n                            <div role=\"tabpanel\" class=\"tab-pane fade\" id=\"sunday\">\n                                <div class=\"nerd-camp__text-block\">\n                                    <table class=\"nerd-camp__table nerd-camp__table_no-boarder\">\n                                        <tr>\n                                            <td width=\"150px\"><b>08:30 &mdash; 09:00</b></td>\n                                            <td>Morning workout (Mikhail Vink is responsible)</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>09:00 &mdash; 10:00</b></td>\n                                            <td>Breakfast</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td width=\"150px\"><b>10:00 &mdash; 10:30</b></td>\n                                            <td>Computer-based math (Gleb Svechnikov)</td>\n                                        </tr>\n                                        <tr class=\"schedule-section\">\n                                            <td width=\"150px\"><b>10:30 &mdash; 15:00</b></td>\n                                            <td>Alternative Edu Projects and Platforms discussion (Dmitry Kalupin &amp; Anton Zeldin)</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>15:00 &mdash; 16:00</b></td>\n                                            <td>Lunch</td>\n                                        </tr>\n                                        <tr>\n                                            <td width=\"150px\"><b>15:30 &mdash; 16:00</b></td>\n                                            <td>Checkout and bus departure</td>\n                                        </tr>\n                                    </table>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"container-fluid nerd-camp__full-width-block\">\n        <div class=\"row nerd-camp_image-gallery\">\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest7.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(27) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(28) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(29) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(30) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/natekin.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(31) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/lifshits.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(32) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/dmitriev1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(33) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n\n            <br/>\n\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/domanski.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(34) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/gumerov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(35) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(36) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/nerd.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(37) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest8.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(38) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(39) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest4.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(40) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n        </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-6 nerd-camp__map-container\">\n                    <span id=\"mymap\"></span>\n                </div>\n                <div class=\"col-md-6\">\n                    <h3 id=\"key-dates\">Organizational Information</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        <div><b>April 5</b>&mdash; Application deadline</div>\n                        <div><b>April 24&ndash;26</b>&mdash; Nёrd|Camp</div>\n                        <div>\n                            <p>Participation fee: <b>7000 ₽</b></p>\n                            <p>Includes:</p>\n                            <ul>\n                                <li>3 days and 2 nights in \"Orekh\"</li>\n                                <li>Transportation to and from the venue</li>\n                                <li>Lodging in separate 4-person houses (2 people per room)</li>\n                                <li>Full meal package (vegetarian options available)</li>\n                                <li>Saturday evening BBQ party</li>\n                            </ul>\n                        </div>\n                    </div>\n                </div>\n            </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h3 id=\"participants\">List of Participants</h3>\n                    <table class=\"nerd-camp__table\">\n                        <tr>\n                            <td>Иван Феофанов, FB Solutions, Owner & Lebedev Physical Institute of the Russian Academy of Science, Researcher</td>\n                            <td>Виктория Васильева, OpenWay, Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Андрей Афанасьев, iBinom, CEO & yCamp, Organizer</td>\n                            <td>Антон Афанасьев, iBinom Inc., Reseacher</td>\n                        </tr>\n                        <tr>\n                            <td>Григорий Фишман, QuantumBrainsCapital, Automated Intelligence Systems</td>\n                            <td>Евгений\tБаландин, Zalivka Mobile, Founder</td>\n                        </tr>\n                        <tr>\n                            <td>Александра Шишова, VimpelCom, Analyst</td>\n                            <td>Илья Онскуль, Deutsche Bank, System Analyst</td>\n                        </tr>\n                        <tr>\n                            <td>Владимир Смирнов, BIOCAD, Bioinformatics Sw Dev</td>\n                            <td>Екатерина Заикина, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Винк, JetBrains, Product Marketing Manager</td>\n                            <td>Алина Контарева, European University, Research Fellow</td>\n                        </tr>\n                        <tr>\n                            <td>Лилия Земнухова, European University, Research Fellow</td>\n                            <td>Яна Сергиевская</td>\n                        </tr>\n                        <tr>\n                            <td>Наталия Лупачева, Openway Service, Senior Support Engineer</td>\n                            <td>Павел Смирнов, ITMO University, Researcher</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Карпов, Manager</td>\n                            <td>Ксения Петрова, Wrike, Growth Product Manager </td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий Орлов, Yandex, Project Manager</td>\n                            <td>Маргарита Касабуцкая, SPbSU, Economic Sociology Department, MA Student</td>\n                        </tr>\n                        <tr>\n                            <td>Елена Индрулинас, Trainee Designer, Legion</td>\n                            <td>Глеб Свечников, Intermedia, Web Designer & 239, Teacher</td>\n                        </tr>\n                        <tr>\n                            <td>Валентина Гулева, Engineer</td>\n                            <td>Зоя\tФедотова, Doctor</td>\n                        </tr>\n                        <tr>\n                            <td>Николай\tКотов, JetBrains. Project Coordinator</td>\n                            <td>Анна Кузьмина, LETI, Assistant Professor</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Кошевой, OpenWay Group, Software Developer</td>\n                            <td>Надежда Петрова, KL10CH</td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий\tПетрашев, Enterprise Product Manager, Wrike</td>\n                            <td>Антон Самойлов, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Доморацкий, ChangeLab, Founder</td>\n                            <td>Анатолий Никитин, JetBrains, Project Lead</td>\n                        </tr>\n                        <tr>\n                            <td>Николай Вяххи, Stepic, Founder</td>\n                            <td>Анастасия Семенюк, VK.com, QA Engineer</td>\n                        </tr>\n                        <tr>\n                            <td>Екатерина Чайкина, Bioinformatics Institute, Coordinator</td>\n                            <td>Анна Львова, Russia-24</td>\n                        </tr>\n                        <tr>\n                            <td>Антон Тихонов, Organic Vaccines, Consultant</td>\n                            <td>Антон Зельдин, Room2room, owner</td>\n                        </tr>\n                        <tr>\n                            <td>Наталья Машьянова, Bioinformatics Institute, Coordinator</td>\n                            <td>Егор Наумов, JetBrains, Project Marketing Manager</td>\n                        </tr>\n                        <tr>\n                            <td>Анна Глотова, Stepic Moscow</td>\n                            <td>Дмитрий Кириллин, Belkasoft, Marketing Director</td>\n                        </tr>\n                        <tr>\n                            <td>Сергей Дмитриев, GameChangers, Founder</td>\n                        </tr>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12 nerd-camp__see-you\">See you soon <font color=\"#d9230f\">;)</font></div>\n        </div>\n\n        <div class=\"modal-footer nerd-camp__footer\">\n            <span>Game<font color=\"#d9230f\">|</font>Changers</span>\n            <span><a href=\"mailto:n.mashyanova@gmail.com\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-envelope-o\"></i>&nbsp;</span>write a letter\n            </a></span>\n            <span><a href=\"http://vk.com/nerdcamp15s\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-vk\"></i>&nbsp;</span>subscribe group\n            </a></span>\n        </div>\n    </div>\n\n    <div id=\"blueimp-gallery\" class=\"blueimp-gallery\">\n        <div class=\"slides\"></div>\n        <h3 class=\"title\"></h3>\n        <a class=\"prev\">‹</a>\n        <a class=\"next\">›</a>\n        <a class=\"close\">×</a>\n        <a class=\"play-pause\"></a>\n        <ol class=\"indicator\"></ol>\n    </div>\n\n    <div class=\"modal nerd-camp__application-form-dlg\" tabindex=\"-1\" role=\"dialog\" labelledby=\"myModalLabel\" aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-md\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header nerd-camp__modal-header_no-border\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n                </div>\n                <div class=\"modal-body\">\n                    <iframe src=\"https://docs.google.com/forms/d/1KSd5NvHOHJqrUfm3tHZrD6KxH-RRMTPtF2IRp38elI4/viewform?embedded=true\" width=\"560\" height=\"450\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\">\n                        Loading...\n                    </iframe>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n";
 
 /***/ },
 /* 25 */
