@@ -53,28 +53,28 @@
 
 	__webpack_require__(4);
 	__webpack_require__(6);
-	__webpack_require__(2);
-	var Gallery = __webpack_require__(3);
+	__webpack_require__(3);
+	var Gallery = __webpack_require__(2);
 
 	var galleryLinks = {
-	  '../assets/rest7.jpg': __webpack_require__(9),
-	  '../assets/asonov1.jpg': __webpack_require__(10),
-	  '../assets/asonov2.jpg': __webpack_require__(11),
-	  '../assets/bbq1.jpg': __webpack_require__(12),
-	  '../assets/natekin.jpg': __webpack_require__(13),
-	  '../assets/lifshits.jpg': __webpack_require__(14),
-	  '../assets/dmitriev1.jpg': __webpack_require__(15),
-	  '../assets/domanski.jpg': __webpack_require__(16),
-	  '../assets/gumerov2.jpg': __webpack_require__(17),
-	  '../assets/bbq2.jpg': __webpack_require__(18),
-	  '../assets/nerd.jpg': __webpack_require__(19),
-	  '../assets/rest8.jpg': __webpack_require__(20),
-	  '../assets/rest1.jpg': __webpack_require__(21),
-	  '../assets/rest4.jpg': __webpack_require__(22)
+	  '../assets/rest7.jpg': __webpack_require__(8),
+	  '../assets/asonov1.jpg': __webpack_require__(9),
+	  '../assets/asonov2.jpg': __webpack_require__(10),
+	  '../assets/bbq1.jpg': __webpack_require__(11),
+	  '../assets/natekin.jpg': __webpack_require__(12),
+	  '../assets/lifshits.jpg': __webpack_require__(13),
+	  '../assets/dmitriev1.jpg': __webpack_require__(14),
+	  '../assets/domanski.jpg': __webpack_require__(15),
+	  '../assets/gumerov2.jpg': __webpack_require__(16),
+	  '../assets/bbq2.jpg': __webpack_require__(17),
+	  '../assets/nerd.jpg': __webpack_require__(18),
+	  '../assets/rest8.jpg': __webpack_require__(19),
+	  '../assets/rest1.jpg': __webpack_require__(20),
+	  '../assets/rest4.jpg': __webpack_require__(21)
 	};
 
 	$(function () {
-	  $(document.body).append(__webpack_require__(8));
+	  $(document.body).append(__webpack_require__(22));
 	  /**
 	   * Skrollr inits sticky header with status and animated arrows
 	   *  var skrollr = require('skrollr');
@@ -111,336 +111,6 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* ========================================================================
-	 * Bootstrap: modal.js v3.3.2
-	 * http://getbootstrap.com/javascript/#modals
-	 * ========================================================================
-	 * Copyright 2011-2015 Twitter, Inc.
-	 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-	 * ======================================================================== */
-
-
-	+function ($) {
-	  'use strict';
-
-	  // MODAL CLASS DEFINITION
-	  // ======================
-
-	  var Modal = function (element, options) {
-	    this.options        = options
-	    this.$body          = $(document.body)
-	    this.$element       = $(element)
-	    this.$backdrop      =
-	    this.isShown        = null
-	    this.scrollbarWidth = 0
-
-	    if (this.options.remote) {
-	      this.$element
-	        .find('.modal-content')
-	        .load(this.options.remote, $.proxy(function () {
-	          this.$element.trigger('loaded.bs.modal')
-	        }, this))
-	    }
-	  }
-
-	  Modal.VERSION  = '3.3.2'
-
-	  Modal.TRANSITION_DURATION = 300
-	  Modal.BACKDROP_TRANSITION_DURATION = 150
-
-	  Modal.DEFAULTS = {
-	    backdrop: true,
-	    keyboard: true,
-	    show: true
-	  }
-
-	  Modal.prototype.toggle = function (_relatedTarget) {
-	    return this.isShown ? this.hide() : this.show(_relatedTarget)
-	  }
-
-	  Modal.prototype.show = function (_relatedTarget) {
-	    var that = this
-	    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
-
-	    this.$element.trigger(e)
-
-	    if (this.isShown || e.isDefaultPrevented()) return
-
-	    this.isShown = true
-
-	    this.checkScrollbar()
-	    this.setScrollbar()
-	    this.$body.addClass('modal-open')
-
-	    this.escape()
-	    this.resize()
-
-	    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
-
-	    this.backdrop(function () {
-	      var transition = $.support.transition && that.$element.hasClass('fade')
-
-	      if (!that.$element.parent().length) {
-	        that.$element.appendTo(that.$body) // don't move modals dom position
-	      }
-
-	      that.$element
-	        .show()
-	        .scrollTop(0)
-
-	      if (that.options.backdrop) that.adjustBackdrop()
-	      that.adjustDialog()
-
-	      if (transition) {
-	        that.$element[0].offsetWidth // force reflow
-	      }
-
-	      that.$element
-	        .addClass('in')
-	        .attr('aria-hidden', false)
-
-	      that.enforceFocus()
-
-	      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
-
-	      transition ?
-	        that.$element.find('.modal-dialog') // wait for modal to slide in
-	          .one('bsTransitionEnd', function () {
-	            that.$element.trigger('focus').trigger(e)
-	          })
-	          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-	        that.$element.trigger('focus').trigger(e)
-	    })
-	  }
-
-	  Modal.prototype.hide = function (e) {
-	    if (e) e.preventDefault()
-
-	    e = $.Event('hide.bs.modal')
-
-	    this.$element.trigger(e)
-
-	    if (!this.isShown || e.isDefaultPrevented()) return
-
-	    this.isShown = false
-
-	    this.escape()
-	    this.resize()
-
-	    $(document).off('focusin.bs.modal')
-
-	    this.$element
-	      .removeClass('in')
-	      .attr('aria-hidden', true)
-	      .off('click.dismiss.bs.modal')
-
-	    $.support.transition && this.$element.hasClass('fade') ?
-	      this.$element
-	        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
-	        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-	      this.hideModal()
-	  }
-
-	  Modal.prototype.enforceFocus = function () {
-	    $(document)
-	      .off('focusin.bs.modal') // guard against infinite focus loop
-	      .on('focusin.bs.modal', $.proxy(function (e) {
-	        if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
-	          this.$element.trigger('focus')
-	        }
-	      }, this))
-	  }
-
-	  Modal.prototype.escape = function () {
-	    if (this.isShown && this.options.keyboard) {
-	      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
-	        e.which == 27 && this.hide()
-	      }, this))
-	    } else if (!this.isShown) {
-	      this.$element.off('keydown.dismiss.bs.modal')
-	    }
-	  }
-
-	  Modal.prototype.resize = function () {
-	    if (this.isShown) {
-	      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
-	    } else {
-	      $(window).off('resize.bs.modal')
-	    }
-	  }
-
-	  Modal.prototype.hideModal = function () {
-	    var that = this
-	    this.$element.hide()
-	    this.backdrop(function () {
-	      that.$body.removeClass('modal-open')
-	      that.resetAdjustments()
-	      that.resetScrollbar()
-	      that.$element.trigger('hidden.bs.modal')
-	    })
-	  }
-
-	  Modal.prototype.removeBackdrop = function () {
-	    this.$backdrop && this.$backdrop.remove()
-	    this.$backdrop = null
-	  }
-
-	  Modal.prototype.backdrop = function (callback) {
-	    var that = this
-	    var animate = this.$element.hasClass('fade') ? 'fade' : ''
-
-	    if (this.isShown && this.options.backdrop) {
-	      var doAnimate = $.support.transition && animate
-
-	      this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
-	        .prependTo(this.$element)
-	        .on('click.dismiss.bs.modal', $.proxy(function (e) {
-	          if (e.target !== e.currentTarget) return
-	          this.options.backdrop == 'static'
-	            ? this.$element[0].focus.call(this.$element[0])
-	            : this.hide.call(this)
-	        }, this))
-
-	      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
-
-	      this.$backdrop.addClass('in')
-
-	      if (!callback) return
-
-	      doAnimate ?
-	        this.$backdrop
-	          .one('bsTransitionEnd', callback)
-	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-	        callback()
-
-	    } else if (!this.isShown && this.$backdrop) {
-	      this.$backdrop.removeClass('in')
-
-	      var callbackRemove = function () {
-	        that.removeBackdrop()
-	        callback && callback()
-	      }
-	      $.support.transition && this.$element.hasClass('fade') ?
-	        this.$backdrop
-	          .one('bsTransitionEnd', callbackRemove)
-	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-	        callbackRemove()
-
-	    } else if (callback) {
-	      callback()
-	    }
-	  }
-
-	  // these following methods are used to handle overflowing modals
-
-	  Modal.prototype.handleUpdate = function () {
-	    if (this.options.backdrop) this.adjustBackdrop()
-	    this.adjustDialog()
-	  }
-
-	  Modal.prototype.adjustBackdrop = function () {
-	    this.$backdrop
-	      .css('height', 0)
-	      .css('height', this.$element[0].scrollHeight)
-	  }
-
-	  Modal.prototype.adjustDialog = function () {
-	    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
-
-	    this.$element.css({
-	      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
-	      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
-	    })
-	  }
-
-	  Modal.prototype.resetAdjustments = function () {
-	    this.$element.css({
-	      paddingLeft: '',
-	      paddingRight: ''
-	    })
-	  }
-
-	  Modal.prototype.checkScrollbar = function () {
-	    this.bodyIsOverflowing = document.body.scrollHeight > document.documentElement.clientHeight
-	    this.scrollbarWidth = this.measureScrollbar()
-	  }
-
-	  Modal.prototype.setScrollbar = function () {
-	    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
-	    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
-	  }
-
-	  Modal.prototype.resetScrollbar = function () {
-	    this.$body.css('padding-right', '')
-	  }
-
-	  Modal.prototype.measureScrollbar = function () { // thx walsh
-	    var scrollDiv = document.createElement('div')
-	    scrollDiv.className = 'modal-scrollbar-measure'
-	    this.$body.append(scrollDiv)
-	    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
-	    this.$body[0].removeChild(scrollDiv)
-	    return scrollbarWidth
-	  }
-
-
-	  // MODAL PLUGIN DEFINITION
-	  // =======================
-
-	  function Plugin(option, _relatedTarget) {
-	    return this.each(function () {
-	      var $this   = $(this)
-	      var data    = $this.data('bs.modal')
-	      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-	      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
-	      if (typeof option == 'string') data[option](_relatedTarget)
-	      else if (options.show) data.show(_relatedTarget)
-	    })
-	  }
-
-	  var old = $.fn.modal
-
-	  $.fn.modal             = Plugin
-	  $.fn.modal.Constructor = Modal
-
-
-	  // MODAL NO CONFLICT
-	  // =================
-
-	  $.fn.modal.noConflict = function () {
-	    $.fn.modal = old
-	    return this
-	  }
-
-
-	  // MODAL DATA-API
-	  // ==============
-
-	  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
-	    var $this   = $(this)
-	    var href    = $this.attr('href')
-	    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
-	    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
-
-	    if ($this.is('a')) e.preventDefault()
-
-	    $target.one('show.bs.modal', function (showEvent) {
-	      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
-	      $target.one('hidden.bs.modal', function () {
-	        $this.is(':visible') && $this.trigger('focus')
-	      })
-	    })
-	    Plugin.call($target, option, this)
-	  })
-
-	}(jQuery);
-
-
-/***/ },
-/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -1787,6 +1457,336 @@
 
 
 /***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* ========================================================================
+	 * Bootstrap: modal.js v3.3.2
+	 * http://getbootstrap.com/javascript/#modals
+	 * ========================================================================
+	 * Copyright 2011-2015 Twitter, Inc.
+	 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+	 * ======================================================================== */
+
+
+	+function ($) {
+	  'use strict';
+
+	  // MODAL CLASS DEFINITION
+	  // ======================
+
+	  var Modal = function (element, options) {
+	    this.options        = options
+	    this.$body          = $(document.body)
+	    this.$element       = $(element)
+	    this.$backdrop      =
+	    this.isShown        = null
+	    this.scrollbarWidth = 0
+
+	    if (this.options.remote) {
+	      this.$element
+	        .find('.modal-content')
+	        .load(this.options.remote, $.proxy(function () {
+	          this.$element.trigger('loaded.bs.modal')
+	        }, this))
+	    }
+	  }
+
+	  Modal.VERSION  = '3.3.2'
+
+	  Modal.TRANSITION_DURATION = 300
+	  Modal.BACKDROP_TRANSITION_DURATION = 150
+
+	  Modal.DEFAULTS = {
+	    backdrop: true,
+	    keyboard: true,
+	    show: true
+	  }
+
+	  Modal.prototype.toggle = function (_relatedTarget) {
+	    return this.isShown ? this.hide() : this.show(_relatedTarget)
+	  }
+
+	  Modal.prototype.show = function (_relatedTarget) {
+	    var that = this
+	    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+
+	    this.$element.trigger(e)
+
+	    if (this.isShown || e.isDefaultPrevented()) return
+
+	    this.isShown = true
+
+	    this.checkScrollbar()
+	    this.setScrollbar()
+	    this.$body.addClass('modal-open')
+
+	    this.escape()
+	    this.resize()
+
+	    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+
+	    this.backdrop(function () {
+	      var transition = $.support.transition && that.$element.hasClass('fade')
+
+	      if (!that.$element.parent().length) {
+	        that.$element.appendTo(that.$body) // don't move modals dom position
+	      }
+
+	      that.$element
+	        .show()
+	        .scrollTop(0)
+
+	      if (that.options.backdrop) that.adjustBackdrop()
+	      that.adjustDialog()
+
+	      if (transition) {
+	        that.$element[0].offsetWidth // force reflow
+	      }
+
+	      that.$element
+	        .addClass('in')
+	        .attr('aria-hidden', false)
+
+	      that.enforceFocus()
+
+	      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
+
+	      transition ?
+	        that.$element.find('.modal-dialog') // wait for modal to slide in
+	          .one('bsTransitionEnd', function () {
+	            that.$element.trigger('focus').trigger(e)
+	          })
+	          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+	        that.$element.trigger('focus').trigger(e)
+	    })
+	  }
+
+	  Modal.prototype.hide = function (e) {
+	    if (e) e.preventDefault()
+
+	    e = $.Event('hide.bs.modal')
+
+	    this.$element.trigger(e)
+
+	    if (!this.isShown || e.isDefaultPrevented()) return
+
+	    this.isShown = false
+
+	    this.escape()
+	    this.resize()
+
+	    $(document).off('focusin.bs.modal')
+
+	    this.$element
+	      .removeClass('in')
+	      .attr('aria-hidden', true)
+	      .off('click.dismiss.bs.modal')
+
+	    $.support.transition && this.$element.hasClass('fade') ?
+	      this.$element
+	        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
+	        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+	      this.hideModal()
+	  }
+
+	  Modal.prototype.enforceFocus = function () {
+	    $(document)
+	      .off('focusin.bs.modal') // guard against infinite focus loop
+	      .on('focusin.bs.modal', $.proxy(function (e) {
+	        if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
+	          this.$element.trigger('focus')
+	        }
+	      }, this))
+	  }
+
+	  Modal.prototype.escape = function () {
+	    if (this.isShown && this.options.keyboard) {
+	      this.$element.on('keydown.dismiss.bs.modal', $.proxy(function (e) {
+	        e.which == 27 && this.hide()
+	      }, this))
+	    } else if (!this.isShown) {
+	      this.$element.off('keydown.dismiss.bs.modal')
+	    }
+	  }
+
+	  Modal.prototype.resize = function () {
+	    if (this.isShown) {
+	      $(window).on('resize.bs.modal', $.proxy(this.handleUpdate, this))
+	    } else {
+	      $(window).off('resize.bs.modal')
+	    }
+	  }
+
+	  Modal.prototype.hideModal = function () {
+	    var that = this
+	    this.$element.hide()
+	    this.backdrop(function () {
+	      that.$body.removeClass('modal-open')
+	      that.resetAdjustments()
+	      that.resetScrollbar()
+	      that.$element.trigger('hidden.bs.modal')
+	    })
+	  }
+
+	  Modal.prototype.removeBackdrop = function () {
+	    this.$backdrop && this.$backdrop.remove()
+	    this.$backdrop = null
+	  }
+
+	  Modal.prototype.backdrop = function (callback) {
+	    var that = this
+	    var animate = this.$element.hasClass('fade') ? 'fade' : ''
+
+	    if (this.isShown && this.options.backdrop) {
+	      var doAnimate = $.support.transition && animate
+
+	      this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+	        .prependTo(this.$element)
+	        .on('click.dismiss.bs.modal', $.proxy(function (e) {
+	          if (e.target !== e.currentTarget) return
+	          this.options.backdrop == 'static'
+	            ? this.$element[0].focus.call(this.$element[0])
+	            : this.hide.call(this)
+	        }, this))
+
+	      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+
+	      this.$backdrop.addClass('in')
+
+	      if (!callback) return
+
+	      doAnimate ?
+	        this.$backdrop
+	          .one('bsTransitionEnd', callback)
+	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+	        callback()
+
+	    } else if (!this.isShown && this.$backdrop) {
+	      this.$backdrop.removeClass('in')
+
+	      var callbackRemove = function () {
+	        that.removeBackdrop()
+	        callback && callback()
+	      }
+	      $.support.transition && this.$element.hasClass('fade') ?
+	        this.$backdrop
+	          .one('bsTransitionEnd', callbackRemove)
+	          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+	        callbackRemove()
+
+	    } else if (callback) {
+	      callback()
+	    }
+	  }
+
+	  // these following methods are used to handle overflowing modals
+
+	  Modal.prototype.handleUpdate = function () {
+	    if (this.options.backdrop) this.adjustBackdrop()
+	    this.adjustDialog()
+	  }
+
+	  Modal.prototype.adjustBackdrop = function () {
+	    this.$backdrop
+	      .css('height', 0)
+	      .css('height', this.$element[0].scrollHeight)
+	  }
+
+	  Modal.prototype.adjustDialog = function () {
+	    var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
+
+	    this.$element.css({
+	      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
+	      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
+	    })
+	  }
+
+	  Modal.prototype.resetAdjustments = function () {
+	    this.$element.css({
+	      paddingLeft: '',
+	      paddingRight: ''
+	    })
+	  }
+
+	  Modal.prototype.checkScrollbar = function () {
+	    this.bodyIsOverflowing = document.body.scrollHeight > document.documentElement.clientHeight
+	    this.scrollbarWidth = this.measureScrollbar()
+	  }
+
+	  Modal.prototype.setScrollbar = function () {
+	    var bodyPad = parseInt((this.$body.css('padding-right') || 0), 10)
+	    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth)
+	  }
+
+	  Modal.prototype.resetScrollbar = function () {
+	    this.$body.css('padding-right', '')
+	  }
+
+	  Modal.prototype.measureScrollbar = function () { // thx walsh
+	    var scrollDiv = document.createElement('div')
+	    scrollDiv.className = 'modal-scrollbar-measure'
+	    this.$body.append(scrollDiv)
+	    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth
+	    this.$body[0].removeChild(scrollDiv)
+	    return scrollbarWidth
+	  }
+
+
+	  // MODAL PLUGIN DEFINITION
+	  // =======================
+
+	  function Plugin(option, _relatedTarget) {
+	    return this.each(function () {
+	      var $this   = $(this)
+	      var data    = $this.data('bs.modal')
+	      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+	      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
+	      if (typeof option == 'string') data[option](_relatedTarget)
+	      else if (options.show) data.show(_relatedTarget)
+	    })
+	  }
+
+	  var old = $.fn.modal
+
+	  $.fn.modal             = Plugin
+	  $.fn.modal.Constructor = Modal
+
+
+	  // MODAL NO CONFLICT
+	  // =================
+
+	  $.fn.modal.noConflict = function () {
+	    $.fn.modal = old
+	    return this
+	  }
+
+
+	  // MODAL DATA-API
+	  // ==============
+
+	  $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
+	    var $this   = $(this)
+	    var href    = $this.attr('href')
+	    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
+	    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+
+	    if ($this.is('a')) e.preventDefault()
+
+	    $target.one('show.bs.modal', function (showEvent) {
+	      if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
+	      $target.one('hidden.bs.modal', function () {
+	        $this.is(':visible') && $this.trigger('focus')
+	      })
+	    })
+	    Plugin.call($target, option, this)
+	  })
+
+	}(jQuery);
+
+
+/***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1851,91 +1851,91 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div>\n    <div class=\"nerd-camp__header\">\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Nёrd<font color=\"#d9230f\">|</font>Camp\n                    <small>April 24-26, 2015</small>\n                </h1>\n            </div>\n            <div class=\"nerd-camp__page-sub-header\">\n                <span>co-learning</span>\n                <span>co-working</span>\n                <span>co-resting</span>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-container\">\n            <div class=\"container\">\n                <div class=\"navbar navbar-inverse\" role=\"navigation\">\n\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"#about\">About</a></li>\n                            <li><a href=\"#key-dates\">Organizational Information</a></li>\n                            <li><a href=\"#participants\">List of Participants</a></li>\n                            <li><a href=\"http://nerdcamp.info/nc2014/\">NёrdCamp'14</a></li>\n                        </ul>\n                        <form class=\"navbar-form navbar-right\">\n                            <!--TODO: uncomment when registration form-->\n                            <!--<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\".nerd-camp__application-form-dlg\">\n                                Application Form\n                            </button>-->\n                        </form>\n                    </div>\n                    <!--/.nav-collapse -->\n\n                    <!--/.container-fluid -->\n                </div>\n                <div class=\"nerd-camp__header-images\">\n                    <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n                </div>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-images\">\n            <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n\n            <div class=\"row\">\n                <div class=\"col-md-7\">\n                    <h3 id=\"about\">About Nёrd<font color=\"#d9230f\">|</font>Camp</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        Nёrd|Camp is a traditional 3-days event in a format of an outdoor weekend.\n                        The word \"Camp\" refers to <a href=\"http://en.wikipedia.org/wiki/BarCamp\">barcamps</a>,\n                        <a href=\"http://en.wikipedia.org/wiki/Foo_Camp\">foo camps</a>.\n                        Its program is formed by participants: specialists from IT industry, scientists and entrepreneurs.\n                        <br/>\n                        Nёrd|Camp has three modes:\n                        <ul>\n                            <li><b>Co-learning:</b> blocks of lectures on modern topics, presented by participants to each\n                                other\n                            </li>\n                            <li><b>Co-working:</b> discussions, workshops</li>\n                            <li><b>Co-resting:</b> outdoor activities, sport exercises every morning, BBQ</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"col-md-4 hidden-sm hidden-print nerd-camp__text-block\">\n                    <div id=\"sidebar\" class=\"nerd-camp__vk-group-container\">\n                        <!-- VK Widget -->\n                        <div id=\"vk_groups\"></div>\n                        <!--<div id=\"mymap\"></div>-->\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n\n    <div class=\"container-fluid nerd-camp__full-width-block\">\n        <div class=\"row nerd-camp_image-gallery\">\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest7.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(26) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(27) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(28) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(29) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/natekin.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(30) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/lifshits.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(31) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/dmitriev1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(32) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n\n            <br/>\n\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/domanski.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(33) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/gumerov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(34) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(35) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/nerd.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(36) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest8.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(37) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(38) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest4.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(39) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n        </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-6 nerd-camp__map-container\">\n                    <span id=\"mymap\"></span>\n                </div>\n                <div class=\"col-md-6\">\n                    <h3 id=\"key-dates\">Organizational Information</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        <div><b>April 5</b>&mdash; Application deadline</div>\n                        <div><b>April 24&ndash;26</b>&mdash; Nёrd|Camp</div>\n                        <div>\n                            <p>Participation fee: <b>7000 ₽</b></p>\n                            <p>Includes:</p>\n                            <ul>\n                                <li>3 days and 2 nights in \"Orekh\"</li>\n                                <li>Transportation to and from the venue</li>\n                                <li>Lodging in separate 4-person houses (2 people per room)</li>\n                                <li>Full meal package (vegetarian options available)</li>\n                                <li>Saturday evening BBQ party</li>\n                            </ul>\n                        </div>\n                    </div>\n                </div>\n            </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h3 id=\"participants\">List of Participants</h3>\n                    <table class=\"nerd-camp__table\">\n                        <tr>\n                            <td>Иван Феофанов, FB Solutions, Owner & Lebedev Physical Institute of the Russian Academy of Science, Researcher</td>\n                            <td>Виктория Васильева, OpenWay, Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Андрей Афанасьев, iBinom, CEO & yCamp, Organizer</td>\n                            <td>Антон Афанасьев, iBinom Inc., Reseacher</td>\n                        </tr>\n                        <tr>\n                            <td>Григорий Фишман, QuantumBrainsCapital, Automated Intelligence Systems</td>\n                            <td>Евгений\tБаландин, Zalivka Mobile, Founder</td>\n                        </tr>\n                        <tr>\n                            <td>Александра Шишова, VimpelCom, Analyst</td>\n                            <td>Илья Онскуль, Deutsche Bank, System Analyst</td>\n                        </tr>\n                        <tr>\n                            <td>Владимир Смирнов, BIOCAD, Bioinformatics Sw Dev</td>\n                            <td>Екатерина Заикина, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Винк, JetBrains, Product Marketing Manager</td>\n                            <td>Алина Контарева, European University, Research Fellow</td>\n                        </tr>\n                        <tr>\n                            <td>Лилия Земнухова, European University, Research Fellow</td>\n                            <td>Александр Ким, Sputnik8.com, Founder</td>\n                        </tr>\n                        <tr>\n                            <td>Наталия Лупачева, Openway Service, Senior Support Engineer</td>\n                            <td>Павел Смирнов, ITMO University, Researcher</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Карпов, Manager</td>\n                            <td>Ксения Петрова, Wrike, Growth Product Manager </td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий Орлов, Yandex, Project Manager</td>\n                            <td>Маргарита Касабуцкая, SPbSU, Economic Sociology Department, MA Student</td>\n                        </tr>\n                        <tr>\n                            <td>Елена Индрулинас, Trainee Designer, Legion</td>\n                            <td>Глеб Свечников, Intermedia, Web Designer & 239, Teacher</td>\n                        </tr>\n                        <tr>\n                            <td>Валентина Гулева, Engineer</td>\n                            <td>Зоя\tФедотова, Doctor</td>\n                        </tr>\n                        <tr>\n                            <td>Николай\tКотов, JetBrains. Project Coordinator</td>\n                            <td>Анна Кузьмина, LETI, Assistant Professor</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Кошевой, OpenWay Group, Software Developer</td>\n                            <td>Владимир Рудых, Head of monetization at Topface</td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий\tПетрашев, Enterprise Product Manager, Wrike</td>\n                            <td>Антон Самойлов, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Доморацкий, ChangeLab, Founder</td>\n                            <td>Анатолий Никитин, JetBrains, Project Lead</td>\n                        </tr>\n                        <tr>\n                            <td>Николай Вяххи, Stepic, Founder</td>\n                            <td>Анастасия Семенюк, VK.com, QA Engineer</td>\n                        </tr>\n                        <tr>\n                            <td>Екатерина Чайкина, Bioinformatics Institute, Coordinator</td>\n                            <td>Анна Львова, Russia-24</td>\n                        </tr>\n                        <tr>\n                            <td>Антон Тихонов, Organic Vaccines, Consultant</td>\n                            <td>Антон Зельдин, Room2room, owner</td>\n                        </tr>\n                        <tr>\n                            <td>Наталья Машьянова, Bioinformatics Institute, Coordinator</td>\n                            <td>Егор Наумов, JetBrains, Project Marketing Manager</td>\n                        </tr>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12 nerd-camp__see-you\">See you soon <font color=\"#d9230f\">;)</font></div>\n        </div>\n\n        <div class=\"modal-footer nerd-camp__footer\">\n            <span>Game<font color=\"#d9230f\">|</font>Changers</span>\n            <span><a href=\"mailto:n.mashyanova@gmail.com\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-envelope-o\"></i>&nbsp;</span>write a letter\n            </a></span>\n            <span><a href=\"http://vk.com/nerdcamp15s\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-vk\"></i>&nbsp;</span>subscribe group\n            </a></span>\n        </div>\n    </div>\n\n    <div id=\"blueimp-gallery\" class=\"blueimp-gallery\">\n        <div class=\"slides\"></div>\n        <h3 class=\"title\"></h3>\n        <a class=\"prev\">‹</a>\n        <a class=\"next\">›</a>\n        <a class=\"close\">×</a>\n        <a class=\"play-pause\"></a>\n        <ol class=\"indicator\"></ol>\n    </div>\n\n    <div class=\"modal nerd-camp__application-form-dlg\" tabindex=\"-1\" role=\"dialog\" labelledby=\"myModalLabel\" aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-md\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header nerd-camp__modal-header_no-border\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n                </div>\n                <div class=\"modal-body\">\n                    <iframe src=\"https://docs.google.com/forms/d/1KSd5NvHOHJqrUfm3tHZrD6KxH-RRMTPtF2IRp38elI4/viewform?embedded=true\" width=\"560\" height=\"450\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\">\n                        Loading...\n                    </iframe>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n";
+	module.exports = __webpack_require__.p + "rest7-1c3fb75ff7c9628404e4f9dafaf18104.jpg"
 
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest7-1c3fb75ff7c9628404e4f9dafaf18104.jpg"
+	module.exports = __webpack_require__.p + "asonov1-2b73589e1841bcca39d6fa9b94c755f8.jpg"
 
 /***/ },
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "asonov1-2b73589e1841bcca39d6fa9b94c755f8.jpg"
+	module.exports = __webpack_require__.p + "asonov2-8d0b6137c22b1f52cca1760d782490e5.jpg"
 
 /***/ },
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "asonov2-8d0b6137c22b1f52cca1760d782490e5.jpg"
+	module.exports = __webpack_require__.p + "bbq1-4b37f7b86b2340668ca7e2a8849ec156.jpg"
 
 /***/ },
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "bbq1-4b37f7b86b2340668ca7e2a8849ec156.jpg"
+	module.exports = __webpack_require__.p + "natekin-b8e04a597c42588a1462cc88fe75b678.jpg"
 
 /***/ },
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "natekin-b8e04a597c42588a1462cc88fe75b678.jpg"
+	module.exports = __webpack_require__.p + "lifshits-c8bd0bd4ea3f636b986758a8ed7a7b67.jpg"
 
 /***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "lifshits-c8bd0bd4ea3f636b986758a8ed7a7b67.jpg"
+	module.exports = __webpack_require__.p + "dmitriev1-2acc3f64477cc6784cee6833869ca54a.jpg"
 
 /***/ },
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "dmitriev1-2acc3f64477cc6784cee6833869ca54a.jpg"
+	module.exports = __webpack_require__.p + "domanski-04d0a07e0f96957c05a6d625a0167cf4.jpg"
 
 /***/ },
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "domanski-04d0a07e0f96957c05a6d625a0167cf4.jpg"
+	module.exports = __webpack_require__.p + "gumerov2-ec533084cabf2c47a790d2c6e9a534d6.jpg"
 
 /***/ },
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "gumerov2-ec533084cabf2c47a790d2c6e9a534d6.jpg"
+	module.exports = __webpack_require__.p + "bbq2-18b7ca59296aacecad8aa1905fbf15f7.jpg"
 
 /***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "bbq2-18b7ca59296aacecad8aa1905fbf15f7.jpg"
+	module.exports = __webpack_require__.p + "nerd-0f9aacf2620f5fb4f03e67d0c05d3d9b.jpg"
 
 /***/ },
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "nerd-0f9aacf2620f5fb4f03e67d0c05d3d9b.jpg"
+	module.exports = __webpack_require__.p + "rest8-27470544a59cf4ae0e3418249fbddd70.jpg"
 
 /***/ },
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest8-27470544a59cf4ae0e3418249fbddd70.jpg"
+	module.exports = __webpack_require__.p + "rest1-1fde5029c9c4d9abcb3730e311cdbeb0.jpg"
 
 /***/ },
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest1-1fde5029c9c4d9abcb3730e311cdbeb0.jpg"
+	module.exports = __webpack_require__.p + "rest4-f286bbb4e26bdadd7d398cabff3a93bf.jpg"
 
 /***/ },
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "rest4-f286bbb4e26bdadd7d398cabff3a93bf.jpg"
+	module.exports = "<div>\n    <div class=\"nerd-camp__header\">\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Nёrd<font color=\"#d9230f\">|</font>Camp\n                    <small>April 24-26, 2015</small>\n                </h1>\n            </div>\n            <div class=\"nerd-camp__page-sub-header\">\n                <span>co-learning</span>\n                <span>co-working</span>\n                <span>co-resting</span>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-container\">\n            <div class=\"container\">\n                <div class=\"navbar navbar-inverse\" role=\"navigation\">\n\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"#about\">About</a></li>\n                            <li><a href=\"#key-dates\">Organizational Information</a></li>\n                            <li><a href=\"#participants\">List of Participants</a></li>\n                            <li><a href=\"http://nerdcamp.info/nc2014/\">NёrdCamp'14</a></li>\n                        </ul>\n                        <form class=\"navbar-form navbar-right\">\n                            <!--TODO: uncomment when registration form-->\n                            <!--<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\".nerd-camp__application-form-dlg\">\n                                Application Form\n                            </button>-->\n                        </form>\n                    </div>\n                    <!--/.nav-collapse -->\n\n                    <!--/.container-fluid -->\n                </div>\n                <div class=\"nerd-camp__header-images\">\n                    <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n                </div>\n            </div>\n        </div>\n        <div class=\"nerd-camp__header-images\">\n            <!--<img src=\"../assets/back-full.png\" height=\"100%\"/>-->\n        </div>\n    </div>\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n\n            <div class=\"row\">\n                <div class=\"col-md-7\">\n                    <h3 id=\"about\">About Nёrd<font color=\"#d9230f\">|</font>Camp</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        Nёrd|Camp is a traditional 3-days event in a format of an outdoor weekend.\n                        The word \"Camp\" refers to <a href=\"http://en.wikipedia.org/wiki/BarCamp\">barcamps</a>,\n                        <a href=\"http://en.wikipedia.org/wiki/Foo_Camp\">foo camps</a>.\n                        Its program is formed by participants: specialists from IT industry, scientists and entrepreneurs.\n                        <br/>\n                        Nёrd|Camp has three modes:\n                        <ul>\n                            <li><b>Co-learning:</b> blocks of lectures on modern topics, presented by participants to each\n                                other\n                            </li>\n                            <li><b>Co-working:</b> discussions, workshops</li>\n                            <li><b>Co-resting:</b> outdoor activities, sport exercises every morning, BBQ</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"col-md-4 hidden-sm hidden-print nerd-camp__text-block\">\n                    <div id=\"sidebar\" class=\"nerd-camp__vk-group-container\">\n                        <!-- VK Widget -->\n                        <div id=\"vk_groups\"></div>\n                        <!--<div id=\"mymap\"></div>-->\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n\n    <div class=\"container-fluid nerd-camp__full-width-block\">\n        <div class=\"row nerd-camp_image-gallery\">\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest7.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(26) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(27) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/asonov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(28) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(29) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/natekin.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(30) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/lifshits.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(31) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/dmitriev1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(32) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n\n            <br/>\n\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/domanski.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(33) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/gumerov2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(34) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/bbq2.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(35) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/nerd.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(36) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest8.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(37) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest1.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(38) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n            <a class=\"nerd-camp__line-preview-img\" data-href=\"../assets/rest4.jpg\" title=\"NёrdCamp 2014\">\n                <img src=\"" + __webpack_require__(39) + "\" alt=\"NёrdCamp 2014\">\n            </a>\n        </div>\n\n            <div class=\"row\">\n                <div class=\"col-md-6 nerd-camp__map-container\">\n                    <span id=\"mymap\"></span>\n                </div>\n                <div class=\"col-md-6\">\n                    <h3 id=\"key-dates\">Organizational Information</h3>\n                    <div class=\"nerd-camp__text-block nerd-camp__text-block_border\">\n                        <div><b>April 5</b>&mdash; Application deadline</div>\n                        <div><b>April 24&ndash;26</b>&mdash; Nёrd|Camp</div>\n                        <div>\n                            <p>Participation fee: <b>7000 ₽</b></p>\n                            <p>Includes:</p>\n                            <ul>\n                                <li>3 days and 2 nights in \"Orekh\"</li>\n                                <li>Transportation to and from the venue</li>\n                                <li>Lodging in separate 4-person houses (2 people per room)</li>\n                                <li>Full meal package (vegetarian options available)</li>\n                                <li>Saturday evening BBQ party</li>\n                            </ul>\n                        </div>\n                    </div>\n                </div>\n            </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h3 id=\"participants\">List of Participants</h3>\n                    <table class=\"nerd-camp__table\">\n                        <tr>\n                            <td>Иван Феофанов, FB Solutions, Owner & Lebedev Physical Institute of the Russian Academy of Science, Researcher</td>\n                            <td>Виктория Васильева, OpenWay, Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Андрей Афанасьев, iBinom, CEO & yCamp, Organizer</td>\n                            <td>Антон Афанасьев, iBinom Inc., Reseacher</td>\n                        </tr>\n                        <tr>\n                            <td>Григорий Фишман, QuantumBrainsCapital, Automated Intelligence Systems</td>\n                            <td>Евгений\tБаландин, Zalivka Mobile, Founder</td>\n                        </tr>\n                        <tr>\n                            <td>Александра Шишова, VimpelCom, Analyst</td>\n                            <td>Илья Онскуль, Deutsche Bank, System Analyst</td>\n                        </tr>\n                        <tr>\n                            <td>Владимир Смирнов, BIOCAD, Bioinformatics Sw Dev</td>\n                            <td>Екатерина Заикина, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Винк, JetBrains, Product Marketing Manager</td>\n                            <td>Алина Контарева, European University, Research Fellow</td>\n                        </tr>\n                        <tr>\n                            <td>Лилия Земнухова, European University, Research Fellow</td>\n                            <td>Яна Сергиевская</td>\n                        </tr>\n                        <tr>\n                            <td>Наталия Лупачева, Openway Service, Senior Support Engineer</td>\n                            <td>Павел Смирнов, ITMO University, Researcher</td>\n                        </tr>\n                        <tr>\n                            <td>Михаил Карпов, Manager</td>\n                            <td>Ксения Петрова, Wrike, Growth Product Manager </td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий Орлов, Yandex, Project Manager</td>\n                            <td>Маргарита Касабуцкая, SPbSU, Economic Sociology Department, MA Student</td>\n                        </tr>\n                        <tr>\n                            <td>Елена Индрулинас, Trainee Designer, Legion</td>\n                            <td>Глеб Свечников, Intermedia, Web Designer & 239, Teacher</td>\n                        </tr>\n                        <tr>\n                            <td>Валентина Гулева, Engineer</td>\n                            <td>Зоя\tФедотова, Doctor</td>\n                        </tr>\n                        <tr>\n                            <td>Николай\tКотов, JetBrains. Project Coordinator</td>\n                            <td>Анна Кузьмина, LETI, Assistant Professor</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Кошевой, OpenWay Group, Software Developer</td>\n                            <td>Надежда Петрова, KL10CH</td>\n                        </tr>\n                        <tr>\n                            <td>Дмитрий\tПетрашев, Enterprise Product Manager, Wrike</td>\n                            <td>Антон Самойлов, JetBrains, Software Developer</td>\n                        </tr>\n                        <tr>\n                            <td>Александр Доморацкий, ChangeLab, Founder</td>\n                            <td>Анатолий Никитин, JetBrains, Project Lead</td>\n                        </tr>\n                        <tr>\n                            <td>Николай Вяххи, Stepic, Founder</td>\n                            <td>Анастасия Семенюк, VK.com, QA Engineer</td>\n                        </tr>\n                        <tr>\n                            <td>Екатерина Чайкина, Bioinformatics Institute, Coordinator</td>\n                            <td>Анна Львова, Russia-24</td>\n                        </tr>\n                        <tr>\n                            <td>Антон Тихонов, Organic Vaccines, Consultant</td>\n                            <td>Антон Зельдин, Room2room, owner</td>\n                        </tr>\n                        <tr>\n                            <td>Наталья Машьянова, Bioinformatics Institute, Coordinator</td>\n                            <td>Егор Наумов, JetBrains, Project Marketing Manager</td>\n                        </tr>\n                        <tr>\n                            <td>Анна Глотова, Stepic Moscow</td>\n                            <td>Дмитрий Кириллин, Belkasoft, Marketing Manager</td>\n                        </tr>\n                        <tr>\n                            <td>Сергей Дмитриев, GameChangers, Founder</td>\n                            <td>Дмитрий Кириллин, Belkasoft, Marketing Manager</td>\n                        </tr>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"container-fluid\">\n\n        <div class=\"row\">\n            <div class=\"col-md-12 nerd-camp__see-you\">See you soon <font color=\"#d9230f\">;)</font></div>\n        </div>\n\n        <div class=\"modal-footer nerd-camp__footer\">\n            <span>Game<font color=\"#d9230f\">|</font>Changers</span>\n            <span><a href=\"mailto:n.mashyanova@gmail.com\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-envelope-o\"></i>&nbsp;</span>write a letter\n            </a></span>\n            <span><a href=\"http://vk.com/nerdcamp15s\">\n                  <span class=\"nerd-camp__link-icon\"><i class=\"fa fa-vk\"></i>&nbsp;</span>subscribe group\n            </a></span>\n        </div>\n    </div>\n\n    <div id=\"blueimp-gallery\" class=\"blueimp-gallery\">\n        <div class=\"slides\"></div>\n        <h3 class=\"title\"></h3>\n        <a class=\"prev\">‹</a>\n        <a class=\"next\">›</a>\n        <a class=\"close\">×</a>\n        <a class=\"play-pause\"></a>\n        <ol class=\"indicator\"></ol>\n    </div>\n\n    <div class=\"modal nerd-camp__application-form-dlg\" tabindex=\"-1\" role=\"dialog\" labelledby=\"myModalLabel\" aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-md\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header nerd-camp__modal-header_no-border\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n                </div>\n                <div class=\"modal-body\">\n                    <iframe src=\"https://docs.google.com/forms/d/1KSd5NvHOHJqrUfm3tHZrD6KxH-RRMTPtF2IRp38elI4/viewform?embedded=true\" width=\"560\" height=\"450\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\">\n                        Loading...\n                    </iframe>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n";
 
 /***/ },
 /* 23 */
